@@ -1,0 +1,7 @@
+/home/robin/BEProject/UCAN/topicmanagement/src/main/java/com/beproject/topicmanagement/configuration/Application.java
+/home/robin/BEProject/UCAN/topicmanagement/src/main/java/com/beproject/topicmanagement/service/TopicService.java
+/home/robin/BEProject/UCAN/topicmanagement/src/main/java/com/beproject/topicmanagement/repository/TopicRepository.java
+/home/robin/BEProject/UCAN/topicmanagement/src/main/java/com/beproject/topicmanagement/configuration/URLConstants.java
+/home/robin/BEProject/UCAN/topicmanagement/src/main/java/com/beproject/topicmanagement/configuration/CORSFilter.java
+/home/robin/BEProject/UCAN/topicmanagement/src/main/java/com/beproject/topicmanagement/models/Topic.java
+/home/robin/BEProject/UCAN/topicmanagement/src/main/java/com/beproject/topicmanagement/rest/TopicController.java

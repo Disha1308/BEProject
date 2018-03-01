@@ -1,0 +1,8 @@
+com/beproject/topicmanagement/repository/TopicRepository.class
+com/beproject/topicmanagement/configuration/Application.class
+com/beproject/topicmanagement/configuration/CORSFilter.class
+com/beproject/topicmanagement/configuration/URLConstants.class
+com/beproject/topicmanagement/service/TopicService.class
+com/beproject/topicmanagement/rest/TopicController.class
+com/beproject/topicmanagement/configuration/Application$JerseyConfig.class
+com/beproject/topicmanagement/models/Topic.class
