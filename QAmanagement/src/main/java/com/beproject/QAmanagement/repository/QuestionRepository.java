@@ -18,4 +18,8 @@ public interface QuestionRepository extends CrudRepository<Question,Long>
 	
 	@Query("select q.questionid from Question q where q.userid=:uid")
 	List<Long> findByuserid(@Param("uid")long uid);
+	
+	@Query("select q.questionid from Question q where q.userid=:uid and q.title=:str")
+	Question findunique(@Param("uid")long uid,@Param("str")String str);
+
 }

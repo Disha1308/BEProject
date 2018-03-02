@@ -26,11 +26,11 @@ public class UserPreference implements Serializable
 	private String communicationLang;
 	private mode communicationMode;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "HH:mm")
 	private Date startTime;
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "HH:mm")
 	private Date endTime;
 	private long userid;
 	

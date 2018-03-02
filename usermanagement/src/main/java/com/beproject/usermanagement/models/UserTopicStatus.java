@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class UserTopicStatus implements Serializable 
 {
 
-	enum topicstatus {interested,expertise};
+	public enum topicstatus {interested,expertise};
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

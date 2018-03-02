@@ -46,6 +46,14 @@ public class TopicController {
 		return u;
 
 	}
+	
+	@POST
+	@Path(URLConstants.TOPIC_NAME_URL)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<String> getTopicDetails(@RequestBody List<Long> topicidlist) {
+		System.out.println("in topic details rest");
+		return topicServe.getdetails(topicidlist);
+	}
 
 	@POST
 	@Path(URLConstants.POST_TOPIC_URL)

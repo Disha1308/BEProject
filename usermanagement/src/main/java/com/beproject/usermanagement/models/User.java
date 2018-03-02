@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Users")
 public class User implements Serializable {
-	enum reputation {beginner, intermediate, expert};
+	//enum reputation {beginner, intermediate, expert};
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class User implements Serializable {
 	private String username;
 	
 	private String name;
-	private reputation status;
+	/*private reputation status;
 
 	public reputation getStatus() {
 		return status;
@@ -37,7 +37,7 @@ public class User implements Serializable {
 
 	public void setStatus(reputation status) {
 		this.status = status;
-	}
+	}*/
 
 	public long getUserid() {
 		return userid;

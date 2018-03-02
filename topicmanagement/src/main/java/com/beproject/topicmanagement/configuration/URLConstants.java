@@ -9,5 +9,6 @@ public interface URLConstants
 	static final String DELETE_TOPIC_URL = "/topics/{id}";
 	static final String VALIDATE_TOPIC_URL = "/validatetopic/{id}";
 	static final String SEARCH_TOPIC_URL = "/searchtopic/{str}";
+	static final String TOPIC_NAME_URL = "/topicdetails";
 
 }

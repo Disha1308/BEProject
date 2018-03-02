@@ -1,12 +1,10 @@
 package com.beproject.QAmanagement.dto;
-
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
+import com.beproject.QAmanagement.configuration.JsonDateSerializer;
 import com.beproject.QAmanagement.models.Question.status;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class QuestionDTO 
 {
@@ -17,22 +15,22 @@ public class QuestionDTO
 	private long upvote;
 	private long downvote;
 	private status state;
-	private List<Long> tagidlist;
+	private List<String> tagnamelist;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date timestamp;
+	private Date timestamp; //question timestamp
 	
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getTimestamp() {
 		return timestamp;
 	}
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
-	public List<Long> getTagidlist() {
-		return tagidlist;
+	public List<String> getTagnamelist() {
+		return tagnamelist;
 	}
-	public void setTagidlist(List<Long> tagidlist) {
-		this.tagidlist = tagidlist;
+	public void setTagnamelist(List<String> tagnamelist) {
+		this.tagnamelist = tagnamelist;
 	}
 	public long getQuestionid() {
 		return questionid;

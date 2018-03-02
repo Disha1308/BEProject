@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.beproject.QAmanagement.models.*;
+import com.beproject.QAmanagement.models.QuestionRating.type;
 import com.beproject.QAmanagement.repository.*;
 
 
@@ -44,23 +45,23 @@ public class RatingService
 		}
 		return false;
 	}
-	
-	//used
+	 
+	//used tested
 	public long getquestionupvotecount(long qid)
 	{
 		if(qservice.validatequestionid(qid))
 		{
-			return qrateRepo.getvote(qid, "upvote");
+			return qrateRepo.getvote(qid, type.upvote);
 		}	
 		return -1;
 	}
 	
-	//used
+	//used tested
 	public long getquestiondownvotecount(long qid)
 	{
 		if(qservice.validatequestionid(qid))
 		{
-			return qrateRepo.getvote(qid, "downvote");
+			return qrateRepo.getvote(qid, type.downvote);
 		}	
 		return -1;
 	}
@@ -95,7 +96,7 @@ public class RatingService
 	{
 		if(aservice.validateanswerid(aid))
 		{
-			return arateRepo.getvote(aid, "upvote");
+			return arateRepo.getvote(aid, type.upvote);
 		}	
 		return -1;
 	}
@@ -105,7 +106,7 @@ public class RatingService
 	{
 		if(aservice.validateanswerid(aid))
 		{
-			return arateRepo.getvote(aid, "downvote");
+			return arateRepo.getvote(aid, type.downvote);
 		}	
 		return -1;
 	}

@@ -4,13 +4,13 @@ com/beproject/usermanagement/models/UserPreference$mode.class
 com/beproject/usermanagement/rest/UserPreferenceController.class
 com/beproject/usermanagement/models/UserTopicStatus.class
 com/beproject/usermanagement/dto/ExpertDTO.class
-com/beproject/usermanagement/models/User$reputation.class
 com/beproject/usermanagement/rest/UserTopicController.class
 com/beproject/usermanagement/service/UserPreferenceService.class
 com/beproject/usermanagement/configurations/Application.class
 com/beproject/usermanagement/repository/UserTopicStatusRepository.class
 com/beproject/usermanagement/configurations/CORSFilter.class
-com/beproject/usermanagement/configurations/Application$JerseyConfig.class
+com/beproject/usermanagement/configurations/ApplicationConfig.class
+com/beproject/usermanagement/configurations/ApplicationConfig$JerseyConfig.class
 com/beproject/usermanagement/repository/UserRepository.class
 com/beproject/usermanagement/models/UserTopicStatus$topicstatus.class
 com/beproject/usermanagement/rest/UserController.class

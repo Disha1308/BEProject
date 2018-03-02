@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.beproject.usermanagement.configurations.URLConstants;
 import com.beproject.usermanagement.models.*;

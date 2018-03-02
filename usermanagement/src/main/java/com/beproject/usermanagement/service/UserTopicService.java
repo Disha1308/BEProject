@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.beproject.usermanagement.models.UserTopicStatus;
+import com.beproject.usermanagement.models.UserTopicStatus.topicstatus;
 import com.beproject.usermanagement.repository.UserTopicStatusRepository;
 
 
@@ -71,7 +72,7 @@ public class UserTopicService
 	{
 		if(uservice.validateuserid(userid))
 		{
-			return statusRepo.findByuseridnstatus(userid, "interested");
+			return statusRepo.findByuseridnstatus(userid, topicstatus.interested);
 		}
 		return null;	
 	}
@@ -80,7 +81,7 @@ public class UserTopicService
 	{
 		if(uservice.validateuserid(userid))
 		{
-			return statusRepo.findByuseridnstatus(userid, "expertise");
+			return statusRepo.findByuseridnstatus(userid, topicstatus.expertise);
 		}
 		return null;	
 	}
@@ -88,7 +89,7 @@ public class UserTopicService
 	public List<Long> getexperts(long topicid)
 	{
 		//todo validation of topic id
-		return statusRepo.findBytopicidnstatus(topicid, "expertise");		
+		return statusRepo.findBytopicidnstatus(topicid, topicstatus.expertise);		
 	}
 	
 	public List<Long> getexpertsmultipleTopics(List<Long> topicsid)
@@ -104,6 +105,6 @@ public class UserTopicService
 	public List<Long> getinterestedusers(long topicid)
 	{
 		//todo validation of topic id
-		return statusRepo.findBytopicidnstatus(topicid, "interested");		
+		return statusRepo.findBytopicidnstatus(topicid, topicstatus.interested);		
 	}
 }

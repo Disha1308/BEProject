@@ -6,6 +6,7 @@
 /home/robin/BEProject/UCAN/usermanagement/src/main/java/com/beproject/usermanagement/configurations/CORSFilter.java
 /home/robin/BEProject/UCAN/usermanagement/src/main/java/com/beproject/usermanagement/service/UserPreferenceService.java
 /home/robin/BEProject/UCAN/usermanagement/src/main/java/com/beproject/usermanagement/repository/UserRepository.java
+/home/robin/BEProject/UCAN/usermanagement/src/main/java/com/beproject/usermanagement/configurations/ApplicationConfig.java
 /home/robin/BEProject/UCAN/usermanagement/src/main/java/com/beproject/usermanagement/models/UserTopicStatus.java
 /home/robin/BEProject/UCAN/usermanagement/src/main/java/com/beproject/usermanagement/dto/ExpertDTO.java
 /home/robin/BEProject/UCAN/usermanagement/src/main/java/com/beproject/usermanagement/rest/UserTopicController.java

@@ -14,6 +14,9 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.beproject.QAmanagement.configuration.JsonDateDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 @Entity
 @Table(name = "Questions")
 public class Question implements Serializable {
@@ -27,6 +30,7 @@ public class Question implements Serializable {
 	@Lob
 	@Type(type = "org.hibernate.type.TextType")
 	private String questionText;
+	
 	private String title;
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
@@ -43,6 +47,8 @@ public class Question implements Serializable {
 	public Date getTimestamp() {
 		return timestamp;
 	}
+	
+	@JsonDeserialize(using = JsonDateDeserializer.class)
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
@@ -91,6 +97,8 @@ public class Question implements Serializable {
 	public Date getPreferredTime() {
 		return preferredTime;
 	}
+	
+	@JsonDeserialize(using = JsonDateDeserializer.class)
 	public void setPreferredTime(Date preferredTime) {
 		this.preferredTime = preferredTime;
 	}

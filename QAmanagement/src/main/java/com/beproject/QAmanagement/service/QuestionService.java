@@ -1,5 +1,6 @@
 package com.beproject.QAmanagement.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,8 @@ public class QuestionService {
 	
 	@Autowired(required = true)
 	QuestionRepository questionRepo;
-	//used
+	
+	//used tested
 	public Question getOneQuestionService(long id) {
 		try {
 			Question u = questionRepo.findOne(id);
@@ -30,8 +32,13 @@ public class QuestionService {
 	{
 		System.out.println("in create question service");
 		try {
+			if(questionRepo.findunique(q.getUserid(), q.getTitle()) == null )
+			{
+			q.setTimestamp(new Date());
 			questionRepo.save(q);
 			return true;
+			}
+			return false;
 		} catch (Exception e) {
 			return false;
 		}

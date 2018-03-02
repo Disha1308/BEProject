@@ -84,4 +84,14 @@ public class TopicService {
 		return topicRepo.search(str);
 	}
 
+	public List<String> getdetails(List<Long> topicidlist) {
+		int i = 0;
+		List<String> slist = new ArrayList<String>();
+		while(i<topicidlist.size())
+		{
+			slist.add(topicRepo.getname(topicidlist.get(i++)));
+		}
+		return slist;
+	}
+
 }

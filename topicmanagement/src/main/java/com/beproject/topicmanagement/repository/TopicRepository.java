@@ -14,4 +14,7 @@ public interface TopicRepository extends CrudRepository<Topic, Long>
 {
 	@Query("select t from Topic t where name like %:str%")
 	List<Topic> search(@Param("str") String str);
+	
+	@Query("select t.name from Topic t where Id=:id")
+	String getname(@Param("id") Long id);
 }

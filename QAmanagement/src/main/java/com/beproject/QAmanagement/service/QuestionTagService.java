@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,8 +26,14 @@ public class QuestionTagService
 	@Autowired
 	QuestionService qservice;
 	
+	QuestionTag qt; 
 	
-	//used
+	QuestionTagService()
+	{
+		qt = new QuestionTag();
+	}
+	
+	//used 
 	public boolean addtag(QuestionTag t)
 	{
 		System.out.println("in add one tag service");
@@ -37,11 +49,11 @@ public class QuestionTagService
 	//used
 	public boolean addmultipletopics(long qid, List<Long> tagidlist)
 	{
-		while(tagidlist.iterator().hasNext())
+		int i = 0;
+		while(i < tagidlist.size())
 		{
-			QuestionTag qt = new QuestionTag();
 			qt.setQuestionid(qid);
-			qt.setTagid(tagidlist.iterator().next());
+			qt.setTagid(tagidlist.get(i++));
 			if(!addtag(qt))
 				return false;
 		}
@@ -60,7 +72,7 @@ public class QuestionTagService
 		}		
 		return null;
 	}
-	//used
+	//used tested
 	public List<Long> getquestions(long tagid)
 	{
 		System.out.println("in get questionid for a tag service");
@@ -71,39 +83,89 @@ public class QuestionTagService
 			return qidlist;
 		}		
 	}
-	//used
+	//used tested
 	public List<Long> getquestionsofmultipletopic(List<Long> tagidlist)
 	{
 		System.out.println("in get questionid for multiple tag service");
 		List<Long> qidlist = new ArrayList<Long>();
-		while(tagidlist.iterator().hasNext())
+		int i=0;
+		while(i<tagidlist.size())
 		{
-			qidlist.addAll(getquestions(tagidlist.iterator().next()));
+			qidlist.addAll(getquestions(tagidlist.get(i)));
+			i++;
 		}
 		return qidlist;		
 	}
 	
-	//used
+	//used tested
 	public List<Long> getInterestedTopicQuestions(long uid) {
 		//todo validation for user id
 		
 		List<Long> u = new ArrayList<Long>();
-		
-		RestTemplate restT = new RestTemplate();
-		u = restT.getForObject("http://localhost:8080/interestedtags/"+uid,null);
-		
+			try{
+			RestTemplate restT = new RestTemplate();
+			ResponseEntity <List<Long>> response = restT.exchange("http://localhost:8080/v1.0/interestedtags/"+uid,
+				    HttpMethod.GET, null, new ParameterizedTypeReference <List<Long>> () {});
+
+				u = response.getBody();
+			if(u==null)
+			{
+				return null;
+			}
+			}
+			catch(Exception e)
+			{
+				System.out.println("invalid url in rest template");
+				return null;
+			}
 		return getquestionsofmultipletopic(u);
+		
 	}
 	
-	//used
+	//used tested
 	public List<Long> getExpertiseTopicQuestions(long uid) {
 		//todo validation for user id
-		
+
 		List<Long> u = new ArrayList<Long>();
-		
-		RestTemplate restT = new RestTemplate();
-		u = restT.getForObject("http://localhost:8080/expertisetags/"+uid,null);
-		
-		return getquestionsofmultipletopic(u);		
+			try{
+			RestTemplate restT = new RestTemplate();
+			ResponseEntity <List<Long>> response = restT.exchange("http://localhost:8080/v1.0/expertisetags/"+uid,
+				    HttpMethod.GET, null, new ParameterizedTypeReference <List<Long>> () {});
+
+				u = response.getBody();
+				if(u==null)
+				{
+					return null;
+				}}
+			catch(Exception e)
+			{
+				System.out.println("invalid url in rest template");
+				return null;
+			}
+		return getquestionsofmultipletopic(u);	
+	}
+	
+	//used tested
+	public List<String> gettagsname(List<Long> tagidlist) {
+		List<String> namelist = new ArrayList<String>();
+		try{
+			RestTemplate restT = new RestTemplate();
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			
+			HttpEntity<List<Long>> request = new HttpEntity<List<Long>>(tagidlist, headers);
+			
+			ResponseEntity <List<String>> response = restT.exchange("http://localhost:8081/v1.0/topicdetails/",
+				    HttpMethod.POST, request, new ParameterizedTypeReference <List<String>> () {});
+
+				namelist = response.getBody();
+				return namelist;
+			}
+			catch(Exception e)
+			{
+				System.out.println("invalid url in rest template");
+				return null;
+			}
 	}
 }
