@@ -33,7 +33,7 @@ public class UserTopicController
 	@Autowired
 	UserPreferenceService upservice;
 	
-	//for frontend.
+	//for frontend. t
 	@POST
 	@Path(URLConstants.SUBSCRIBE_TAG_URL)
 	public boolean subscribe(@RequestBody UserTopicStatus tagstatus) {
@@ -41,7 +41,7 @@ public class UserTopicController
 		return tagservice.subscribetoTopic(tagstatus);
 	}
 	
-	//for frontend.
+	//for frontend. t
 		@GET
 		@Path(URLConstants.UNSUBSCRIBE_TAG_URL)
 		public boolean unsubscribe(@PathParam("userid") long uid,@PathParam("tagid") long tid ) {
@@ -49,7 +49,7 @@ public class UserTopicController
 			return tagservice.unsubscribetoTopic(uid, tid);
 		}
 	
-	//for inter service
+	//for inter service tested
 	@GET
 	@Path(URLConstants.GET_USER_INTERESTED_TAG_URL)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -58,7 +58,7 @@ public class UserTopicController
 		 return tagservice.getinterestedtopics(userid);
 	}
 	
-	//for interservice
+	//for interservice tested
 	@GET
 	@Path(URLConstants.GET_USER_EXPERTISE_TAG_URL)
 	@Produces(MediaType.APPLICATION_JSON)

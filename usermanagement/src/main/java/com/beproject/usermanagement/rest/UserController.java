@@ -26,7 +26,7 @@ public class UserController {
 	@Autowired
 	UserMgmtService userServe;
 
-	//for frontend
+	//for frontend t
 	@GET
 	@Path(URLConstants.GET_USER_URL)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -37,7 +37,7 @@ public class UserController {
 
 	}
 	
-	//may be required
+	//may be required t
 	@GET
 	@Path(URLConstants.GET_USER_ID_URL)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -48,7 +48,7 @@ public class UserController {
 		return u;
 	}
 	
-	//may be required
+	//may be required t
 	@GET
 	@Path(URLConstants.GET_USER_USERNAME_URL)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -58,7 +58,7 @@ public class UserController {
 		return u;
 	}
 
-	//for frontend
+	//for frontend t
 	@POST
 	@Path(URLConstants.POST_USER_URL)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -67,7 +67,7 @@ public class UserController {
 		return userServe.createUser(u);
 	}
 
-	//for frontend
+	//for frontend t
 	@PUT
 	@Path(URLConstants.PUT_USER_URL)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -76,7 +76,7 @@ public class UserController {
 		return userServe.updateUserdetails(u, id);
 	}
 
-	//for interservice
+	//for interservice t
 	@GET
 	@Path(URLConstants.VALIDATE_USER_URL)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -85,7 +85,7 @@ public class UserController {
 		return userServe.validateuserid(id);
 	}
 	
-	//for frontend
+	//for frontend t
 	@GET
 	@Path(URLConstants.SEARCH_USER_URL)
 	@Produces(MediaType.APPLICATION_JSON)

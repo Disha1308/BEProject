@@ -14,6 +14,9 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.beproject.QAmanagement.configuration.JsonDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 @Table(name = "Answers")
 public class Answers implements Serializable
@@ -33,7 +36,8 @@ public class Answers implements Serializable
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date timestamp;
 	
-	public Date getTimestamp() {
+	@JsonSerialize(using=JsonDateSerializer.class)
+		public Date getTimestamp() {
 		return timestamp;
 	}
 	public void setTimestamp(Date timestamp) {

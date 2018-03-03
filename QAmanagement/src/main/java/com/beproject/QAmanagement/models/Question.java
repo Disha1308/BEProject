@@ -15,7 +15,9 @@ import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.beproject.QAmanagement.configuration.JsonDateDeserializer;
+import com.beproject.QAmanagement.configuration.JsonDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "Questions")
@@ -44,6 +46,7 @@ public class Question implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date timestamp;
 	
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getTimestamp() {
 		return timestamp;
 	}
@@ -94,6 +97,7 @@ public class Question implements Serializable {
 	public void setState(status state) {
 		this.state = state;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getPreferredTime() {
 		return preferredTime;
 	}

@@ -5,7 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.beproject.usermanagement.models.UserTopicStatus;
 import com.beproject.usermanagement.models.UserTopicStatus.topicstatus;
@@ -21,38 +24,65 @@ public class UserTopicService
 	@Autowired
 	UserMgmtService uservice;
 	
+	//tested
 	public boolean subscribetoTopic(UserTopicStatus t)
 	{
 		long userid= t.getUserid();
 		long topicid = t.getTopicid();
 		if(uservice.validateuserid(userid))
 		{
-			//todo validate topicid
-			UserTopicStatus registeredstatus = statusRepo.findTopic(userid, topicid);
-			if( registeredstatus != null)
+			try{
+				RestTemplate restT = new RestTemplate();
+			ResponseEntity<Boolean> response = restT.exchange("http://localhost:8081/v1.0/validatetopic/"+topicid,
+				    HttpMethod.GET, null, boolean.class);
+			if(response.getBody()==true)
 			{
-				//need update 
-				t.setTopicstatusid(registeredstatus.getTopicstatusid());
+				UserTopicStatus registeredstatus = statusRepo.findTopic(userid, topicid);
+				if( registeredstatus != null)
+				{
+					//need update 
+					t.setTopicstatusid(registeredstatus.getTopicstatusid());
+				}
+				statusRepo.save(t);	//save to update or create
+				return true;
 			}
-			statusRepo.save(t);	//save to update or create
-			return true;
+			}
+			catch(Exception e)
+			{
+				System.out.println("Topic management not available");//unable to get topic
+			}
+			return false; //invalid topicid
+			
 		}
 		return false; //invalid userid
 	}
 	
+	//tested
 	public boolean unsubscribetoTopic(long uid, long tid)
 	{
 		if(uservice.validateuserid(uid))
 		{
-			//todo validate topicid
-			UserTopicStatus registeredstatus = statusRepo.findTopic(uid, tid);
-			if( registeredstatus != null)
+			try{
+				RestTemplate restT = new RestTemplate();
+			ResponseEntity<Boolean> response = restT.exchange("http://localhost:8081/v1.0/validatetopic/"+tid,
+				    HttpMethod.GET, null, boolean.class);
+			if(response.getBody()==true)
 			{
-				statusRepo.delete(registeredstatus.getTopicstatusid());	//delete entry
-				return true;
+				UserTopicStatus registeredstatus = statusRepo.findTopic(uid, tid);
+				if( registeredstatus != null)
+				{
+					statusRepo.delete(registeredstatus.getTopicstatusid());	//delete entry
+					return true;
+				}
+				return false; //no valid entry for uid and tid
 			}
-			
-			return false;	//no entry for topic found.
+			}
+			catch(Exception e)
+			{
+				System.out.println("Topic management not available");//unable to get topic
+			}
+			return false; //invalid topicid cannot delete entry
+
 		}
 		return false; //invalid userid
 	}
@@ -68,6 +98,7 @@ public class UserTopicService
 		return true;
 	}*/
 	
+	//used tested
 	public List<Long> getinterestedtopics(long userid)
 	{
 		if(uservice.validateuserid(userid))
@@ -77,6 +108,7 @@ public class UserTopicService
 		return null;	
 	}
 	
+	//used tested
 	public List<Long> getexpertisetopics(long userid)
 	{
 		if(uservice.validateuserid(userid))
@@ -88,8 +120,21 @@ public class UserTopicService
 	
 	public List<Long> getexperts(long topicid)
 	{
-		//todo validation of topic id
-		return statusRepo.findBytopicidnstatus(topicid, topicstatus.expertise);		
+		try{
+			RestTemplate restT = new RestTemplate();
+		ResponseEntity<Boolean> response = restT.exchange("http://localhost:8081/v1.0/validatetopic/"+topicid,
+			    HttpMethod.GET, null, boolean.class);
+		if(response.getBody()==true)
+		{
+			return statusRepo.findBytopicidnstatus(topicid, topicstatus.expertise);	
+		}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Topic management not available");//unable to get topic
+		}
+		return null; //invalid topicid
+			
 	}
 	
 	public List<Long> getexpertsmultipleTopics(List<Long> topicsid)
@@ -102,6 +147,8 @@ public class UserTopicService
 		}
 		return expertlist;			
 	}
+	
+	
 	public List<Long> getinterestedusers(long topicid)
 	{
 		//todo validation of topic id

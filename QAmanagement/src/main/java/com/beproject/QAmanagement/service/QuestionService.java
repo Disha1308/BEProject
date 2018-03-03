@@ -4,7 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.beproject.QAmanagement.models.Question;
 import com.beproject.QAmanagement.repository.*;
@@ -26,8 +29,8 @@ public class QuestionService {
 			return null;
 		}
 	}
-	
-	//used
+	 
+	//used t
 	public boolean createQuestion(Question q)
 	{
 		System.out.println("in create question service");
@@ -57,9 +60,22 @@ public class QuestionService {
 		return false;
 	}
 	
-	//used
+	//used t
 	public List<Long> getaskedQuestions(long uid)
-	{		//todo validate user id
+	{		try{
+		RestTemplate restT = new RestTemplate();
+	ResponseEntity<Boolean> response = restT.exchange("http://localhost:8080/v1.0/validateuser/"+uid,
+		    HttpMethod.GET, null, boolean.class);
+	if(response.getBody()==true)
+	{
 		return questionRepo.findByuserid(uid);
+	}
+	}
+	catch(Exception e)
+	{
+		System.out.println("user management not available");
+		
+	}
+	return null;
 	}
 }

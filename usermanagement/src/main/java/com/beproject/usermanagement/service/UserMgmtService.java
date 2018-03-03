@@ -46,17 +46,22 @@ public class UserMgmtService
 		}
 	}
 	
-	public boolean createUser(User u)
+	public boolean createUser(User u)//t
 	{
 		System.out.println("in create user service");
+		if(u.getEmail() != null && u.getUsername()!=null && u.getPassword()!=null)
+		{
 		try {
 			userRepo.save(u);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
+		}
+		return false;
 	}
 	
+	//t
 	public boolean updateUserdetails(User u,long id)
 	{
 		System.out.println("in put user db service");
@@ -65,12 +70,17 @@ public class UserMgmtService
 		User registeruser=userRepo.findOne(id);
 		if(registeruser == null)
 			return false;
+		if(u.getEmail() != null && u.getUsername()!=null && u.getPassword()!=null)
+		{
 		userRepo.save(u);
 		return true;
+		}
+		return false;
 		}
 		return false;		
 	}
 	
+	//t
 	public boolean validateuserid(long userid)
 	{
 		if(userRepo.findOne(userid) != null)
@@ -78,6 +88,7 @@ public class UserMgmtService
 		return false;
 	}
 	
+	//t
 	public List<User> searchuser(String str)
 	{
 		return userRepo.search(str);

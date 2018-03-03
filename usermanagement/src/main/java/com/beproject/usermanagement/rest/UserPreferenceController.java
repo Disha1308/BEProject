@@ -12,7 +12,6 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.beproject.usermanagement.configurations.URLConstants;
 import com.beproject.usermanagement.models.*;
@@ -25,7 +24,7 @@ public class UserPreferenceController {
 	@Autowired
 	UserPreferenceService preferenceServe;
 
-	//for frontend.
+	//for frontend. t
 	@GET
 	@Path(URLConstants.GET_USER_PREFERENCE_URL)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -34,20 +33,20 @@ public class UserPreferenceController {
 		return preferenceServe.getByUserid(userid);
 		}
 	
-	//may be required.
+	/*//may be required.
 	@POST
 	@Path(URLConstants.POST_USER_PREFERENCE_URL)
 	@Produces(MediaType.APPLICATION_JSON)
 	public boolean createUserpreference(@RequestBody UserPreference u) {
 		System.out.println("in post user preference rest");
 		return preferenceServe.createUserPreference(u);
-	}
+	}*/
 
-	//for frontend.
+	//for frontend. t
 	@PUT
 	@Path(URLConstants.PUT_USER_PREFERENCE_URL)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean updateUser(@RequestBody UserPreference u, @PathParam("id") long id) {
+	public boolean updateUser(@RequestBody UserPreference u, @PathParam("userid") long id) {
 		System.out.println("in put user preference rest");
 		return preferenceServe.updateUserPreference(u, id);
 	}

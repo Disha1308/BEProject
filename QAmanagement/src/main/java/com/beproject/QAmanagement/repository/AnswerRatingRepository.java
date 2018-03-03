@@ -16,7 +16,7 @@ public interface AnswerRatingRepository extends CrudRepository<AnswerRating,Long
 	long getvote(@Param("aid") long aid, @Param("t") type upvote);
 	
 	@Query("select a from AnswerRating a where a.answerid=:aid and a.userid= :uid ")
-	AnswerRating findByUseridQuestionid(@Param("aid") long aid, @Param("uid") long uid);
+	AnswerRating findByUseridAnswerid(@Param("aid") long aid, @Param("uid") long uid);
 	
 
 

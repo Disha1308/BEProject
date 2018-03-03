@@ -14,7 +14,7 @@ public class UserPreferenceService
 	
 	@Autowired
 	UserMgmtService uservice;
-	
+	//t
 	public UserPreference getByUserid(long userid)
 	{
 		if(uservice.validateuserid(userid))
@@ -33,7 +33,7 @@ public class UserPreferenceService
 		return null;
 	}
 	
-	public boolean createUserPreference(UserPreference u)
+	/*public boolean createUserPreference(UserPreference u)
 	{
 		if(uservice.validateuserid(u.getUserid()))
 		{	
@@ -49,8 +49,9 @@ public class UserPreferenceService
 		}
 		}
 		return false;
-	}
+	}*/
 	
+	//t
 	public boolean updateUserPreference(UserPreference u, long userid)
 	{
 		if(uservice.validateuserid(userid))
@@ -58,13 +59,17 @@ public class UserPreferenceService
 			if(u.getUserid() == userid)
 			{
 			UserPreference registerpreference =preferenceRepo.findByuserid(userid);
-			if(registerpreference == null)
-				return false;
+			if(registerpreference != null)
+			{
+				u.setPreferenceid(registerpreference.getPreferenceid());
+			}
 			preferenceRepo.save(u);
 			return true;
 			}
+			System.out.println("no same userid");
 		return false;
 		}
+		System.out.println("invalid userid");
 		return false;
 	}
 }

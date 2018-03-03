@@ -1,7 +1,10 @@
 package com.beproject.QAmanagement.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.beproject.QAmanagement.models.*;
 import com.beproject.QAmanagement.models.QuestionRating.type;
@@ -22,25 +25,38 @@ public class RatingService
 	
 	@Autowired
 	AnswerService aservice;
-	//used
+	//used t
 	public boolean votequestion(QuestionRating r)
 	{
 		if(qservice.validatequestionid(r.getQuestionid()))
 		{
-			//todo validate userid
-			long uid = r.getUserid();
-			long qid = r.getQuestionid();
-			QuestionRating qr = qrateRepo.findByUseridQuestionid(qid, uid);
-			if(qr.getVote().equals(r.getVote()))
+			try{
+				RestTemplate restT = new RestTemplate();
+				ResponseEntity<Boolean> response = restT.exchange("http://localhost:8080/v1.0/validateuser/"+r.getUserid(),
+					    HttpMethod.GET, null, boolean.class);
+				if(response.getBody()==true)
+				{
+					long uid = r.getUserid();
+					long qid = r.getQuestionid();
+					QuestionRating qr = qrateRepo.findByUseridQuestionid(qid, uid);
+					if(qr!=null){
+					if( qr.getVote().equals(r.getVote()))
+					{
+						//delete row
+						qrateRepo.delete(qr);
+						return false;
+					}				
+					else{
+						r.setQratingid(qr.getQratingid());
+					}
+					}
+					qrateRepo.save(r);
+					return true;
+				}
+			}
+			catch(Exception e)
 			{
-				//delete row
-				qrateRepo.delete(qr);
-				return false;
-			}				
-			else{
-				r.setQratingid(qr.getQratingid());
-			qrateRepo.save(r);
-			return true;
+				System.out.println("user management not available");
 			}
 		}
 		return false;
@@ -66,32 +82,44 @@ public class RatingService
 		return -1;
 	}
 	
-	//used
+	//used t
 	public boolean voteanswer(AnswerRating r)
 	{
 		if(aservice.validateanswerid(r.getAnswerid()))
 		{
-			//todo validate userid
-			long aid = r.getAnswerid();
-			long uid = r.getUserid();
-			AnswerRating ar = arateRepo.findByUseridQuestionid(aid, uid);
-			if(ar.getVote().equals(r.getVote()))
-			{
-				//delete row
-				arateRepo.delete(ar);
-				return false;
+			try{
+				RestTemplate restT = new RestTemplate();
+				ResponseEntity<Boolean> response = restT.exchange("http://localhost:8080/v1.0/validateuser/"+r.getUserid(),
+					    HttpMethod.GET, null, boolean.class);
+				if(response.getBody()==true)
+				{
+					long uid = r.getUserid();
+					long aid = r.getAnswerid();
+					AnswerRating qr = arateRepo.findByUseridAnswerid(aid, uid);
+					if(qr!=null){
+					if( qr.getVote().equals(r.getVote()))
+					{
+						//delete row
+						arateRepo.delete(qr);
+						return false;
+					}				
+					else{
+						r.setAratingid(qr.getAratingid());
+					}
+					}
+					arateRepo.save(r);
+					return true;
+				}
 			}
-			else
+			catch(Exception e)
 			{
-				r.setAratingid(ar.getAratingid());
-			arateRepo.save(r);
-			return true;
+				System.out.println("user management not available");
 			}
 		}
 		return false;
 	}
 	
-	//used
+	//used t
 	public long getanswerupvotecount(long aid)
 	{
 		if(aservice.validateanswerid(aid))
@@ -101,7 +129,7 @@ public class RatingService
 		return -1;
 	}
 	
-	//used
+	//used t
 	public long getanswerdownvotecount(long aid)
 	{
 		if(aservice.validateanswerid(aid))

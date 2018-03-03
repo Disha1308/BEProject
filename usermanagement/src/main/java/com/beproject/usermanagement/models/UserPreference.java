@@ -1,6 +1,7 @@
 package com.beproject.usermanagement.models;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -26,12 +27,9 @@ public class UserPreference implements Serializable
 	private String communicationLang;
 	private mode communicationMode;
 	
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern = "HH:mm")
-	private Date startTime;
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern = "HH:mm")
-	private Date endTime;
+	private Time startTime;
+	
+	private Time endTime;
 	private long userid;
 	
 	public long getPreferenceid() {
@@ -52,16 +50,16 @@ public class UserPreference implements Serializable
 	public void setCommunicationMode(mode communicationMode) {
 		this.communicationMode = communicationMode;
 	}
-	public Date getStartTime() {
+	public Time getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Date startTime) {
+	public void setStartTime(Time startTime) {
 		this.startTime = startTime;
 	}
 	public Date getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Date endTime) {
+	public void setEndTime(Time endTime) {
 		this.endTime = endTime;
 	}
 	public long getUserid() {

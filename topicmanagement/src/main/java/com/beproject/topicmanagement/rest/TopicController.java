@@ -80,7 +80,7 @@ public class TopicController {
 		return topicServe.deleteTopic(id);
 	}
 	
-	@GET
+	@GET //tested
 	@Path(URLConstants.VALIDATE_TOPIC_URL)
 	@Produces(MediaType.APPLICATION_JSON)
 	public boolean validateTopic(@PathParam("id") long id) {

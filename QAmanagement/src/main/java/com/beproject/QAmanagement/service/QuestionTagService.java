@@ -33,34 +33,48 @@ public class QuestionTagService
 		qt = new QuestionTag();
 	}
 	
-	//used 
+	//used tested
 	public boolean addtag(QuestionTag t)
 	{
 		System.out.println("in add one tag service");
 		if(qservice.validatequestionid(t.getQuestionid()))
 		{
-			//todo validation for topicid
+			//validation for topicid
+			try{
+				RestTemplate restT = new RestTemplate();
+			ResponseEntity<Boolean> response = restT.exchange("http://localhost:8081/v1.0/validatetopic/"+t.getTagid(),
+				    HttpMethod.GET, null, boolean.class);
+			if(response.getBody()==true)
+			{
 			qtRepo.save(t);
 			return true;
+			}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Topic management not available");//no topic added
+			}
+			return false; //invalid topicid
 		}		
-		return false;
+		return false; //invalid questionid
 	}
 	
-	//used
+	//used tested 
 	public boolean addmultipletopics(long qid, List<Long> tagidlist)
 	{
 		int i = 0;
+		if(tagidlist == null)
+			return false;
 		while(i < tagidlist.size())
 		{
 			qt.setQuestionid(qid);
 			qt.setTagid(tagidlist.get(i++));
-			if(!addtag(qt))
-				return false;
+			addtag(qt);
 		}
 		return true;
 	}
 	
-	//used
+	//used t  for frontend also
 	public List<Long> gettagids(long qid)
 	{
 		System.out.println("in get tags of question service");
@@ -77,12 +91,25 @@ public class QuestionTagService
 	{
 		System.out.println("in get questionid for a tag service");
 		List<Long> qidlist = new ArrayList<Long>();
-		//todo validation for topicid
+		//validation for topicid
+		try{
+		RestTemplate restT = new RestTemplate();
+		ResponseEntity<Boolean> response = restT.exchange("http://localhost:8081/v1.0/validatetopic/"+tagid,
+			    HttpMethod.GET, null, boolean.class);
+		if(response.getBody()==true)
 		{
 			qidlist = qtRepo.findbyTopicid(tagid);
 			return qidlist;
-		}		
+		}
+		return null; //invalid topicid
+		}
+		catch(Exception e)
+		{
+			System.out.println("topic management not available");
+			return null; //resource not available
+		}	
 	}
+	
 	//used tested
 	public List<Long> getquestionsofmultipletopic(List<Long> tagidlist)
 	{
@@ -110,7 +137,7 @@ public class QuestionTagService
 				u = response.getBody();
 			if(u==null)
 			{
-				return null;
+				return null; //if user not sucsbribed to any topic
 			}
 			}
 			catch(Exception e)

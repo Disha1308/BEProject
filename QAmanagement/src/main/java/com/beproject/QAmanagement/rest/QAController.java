@@ -54,7 +54,7 @@ public class QAController
 		return dservice.getuserexpertisetopicQuestions(userid,pageno);
 	}
 	
-	@GET
+	@GET //t
 	@Path(URLConstants.GET_USER_ASKED_URL)
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<QuestionDTO> getUserAskedQuestions(@PathParam("userid") long userid,@PathParam("pageno") int pageno) {
@@ -62,15 +62,15 @@ public class QAController
 		return dservice.getuseraskedQuestions(userid,pageno);
 	}
 	
-	@GET
+	@GET //t
 	@Path(URLConstants.GET_USER_ANSWERS_URL)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<AnswerDTO> getUserAnswers(@PathParam("userid") long userid) {
+	public List<AnswerDTO> getUserAnswers(@PathParam("userid") long userid,@PathParam("pageno") int pageno) {
 		System.out.println("in get user asked questions controller");	
-		return dservice.getuseranswer(userid);
+		return dservice.getuseranswer(userid,pageno);
 	}
 	
-	@GET
+	@GET //t
 	@Path(URLConstants.GET_QUESTION_ANSWERS_URL)
 	@Produces(MediaType.APPLICATION_JSON)
 	public QADTO getQuestionAnswers(@PathParam("questionid") long qid) {
@@ -78,38 +78,33 @@ public class QAController
 		return dservice.getquestionanswer(qid);
 	}
 	
-	@POST
+	@POST // t
 	@Path(URLConstants.POST_ANSWER_URL)
 	public boolean postAnswer(@RequestBody Answers a) {
 		System.out.println("in post answer controller");	
 		return dservice.postanswer(a);
 	}
 	
-	@POST
+	@POST // t
 	@Path(URLConstants.POST_ANSWER_VOTE_URL)
 	public boolean postAnswerVote(@RequestBody AnswerRating a) {
 		System.out.println("in post answer vote controller");	
 		return dservice.postanswervote(a);
 	}
 	
-	@POST
+	@POST //t
 	@Path(URLConstants.POST_QUESTION_VOTE_URL)
 	public boolean postQuestionVote(@RequestBody QuestionRating r) {
 		System.out.println("in post question vote controller");	
 		return dservice.postquestionvote(r);
 	}
 	
-	@POST 
+	@POST  //tested
 	@Path(URLConstants.POST_QUESTION_URL)
 	public boolean postQuestion(@RequestBody PostQuestionDTO q) {
 		System.out.println("in post question controller");	
 		return dservice.postquestion(q);
 	}
 	
-	@InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM");
-        sdf.setLenient(true);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-    }
+	
 }

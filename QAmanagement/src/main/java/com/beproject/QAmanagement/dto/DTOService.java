@@ -96,11 +96,14 @@ public class DTOService
 			{page.add(qdtolist.get(s));}
 		return page;
 	}
-
+	
+	//t
 	public List<QuestionDTO> getuseraskedQuestions(long userid, int pageno) 
 	{
 		List<Long> qidlist = qservice.getaskedQuestions(userid);
 		List<QuestionDTO> qdtolist = new ArrayList<QuestionDTO>();
+		if(qidlist == null)
+			return null;
 		int i=0;
 		while (i < qidlist.size())
 		{
@@ -125,10 +128,12 @@ public class DTOService
 			{page.add(qdtolist.get(s));}
 		return page;
 	}
-
-	public List<AnswerDTO> getuseranswer(long userid) {
+	//t
+	public List<AnswerDTO> getuseranswer(long userid,int pageno) {
 		List<AnswerDTO> adtolist = new ArrayList<AnswerDTO>();
 		List<Answers> alist = aservice.getuseranswers(userid);
+		if(alist ==null)
+			return null;
 		int i=0;
 		while(i< alist.size())
 		{
@@ -139,16 +144,26 @@ public class DTOService
 			ato.setDownvote(rservice.getanswerdownvotecount(a.getAnswerid()));
 			adtolist.add(ato);
 		}		
-		return adtolist;
+		int start = (pageno - 1)*10;
+		if(start >= adtolist.size())
+			return null;
+		List<AnswerDTO> page = new ArrayList<AnswerDTO>();
+		for(int s = start; s <(start+10) && s < adtolist.size();s++)
+			{page.add(adtolist.get(s));}
+		return page;
 	}
-
+	//t
 	public QADTO getquestionanswer(long qid) 
 	{
 		Question q = qservice.getOneQuestionService(qid);
+		if(q != null){
 		List<Answers> alist = aservice.getbyquestionid(qid);
 		List<AnswerDTO> adtolist = new ArrayList<AnswerDTO>();
 		QADTO qa = new QADTO();
 		qa.setQuestion(q);
+		qa.setQuestionupvote(rservice.getquestionupvotecount(qid));
+		qa.setQuestiondownvote(rservice.getquestiondownvotecount(qid));
+		qa.setQtagname(qtservice.gettagsname(qtservice.gettagids(q.getQuestionid())));		
 		int i=0;
 		while(i< alist.size())
 		{
@@ -161,21 +176,28 @@ public class DTOService
 		}
 		qa.setAnswers(adtolist);
 		return qa;
+		}
+		return null;
 	}
-
+	
+	//tested
 	public boolean postanswer(Answers a) {
-		return aservice.createAnswer(a);
+		if(qservice.validatequestionid(a.getQuestionid()))
+			return aservice.createAnswer(a);
+		return false;
 	}
-
+	//t
 	public boolean postanswervote(AnswerRating a) {
 		return rservice.voteanswer(a);
 		
 	}
-
+	
+	//tested
 	public boolean postquestionvote(QuestionRating r) {
 		return rservice.votequestion(r);
 	}
-
+	
+	//tested
 	public boolean postquestion(PostQuestionDTO q) {
 		if(!qservice.createQuestion(q.getQuestion()))
 			return false;
