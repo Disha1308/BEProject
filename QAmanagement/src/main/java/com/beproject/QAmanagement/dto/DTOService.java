@@ -51,7 +51,7 @@ public class DTOService
 			}
 			i++;
 		}
-		qdtolist.sort(Comparator.comparing(QuestionDTO::getTimestamp).reversed());
+		qdtolist.sort(Comparator.comparing(QuestionDTO::getTimestamp, Comparator.nullsLast(Comparator.naturalOrder())).reversed());
 		int start = (pageno - 1)*10;
 		if(start >= qdtolist.size())
 			return null;
@@ -87,7 +87,7 @@ public class DTOService
 			i++;
 			
 		}
-		qdtolist.sort(Comparator.comparing(QuestionDTO::getTimestamp).reversed());
+		qdtolist.sort(Comparator.comparing(QuestionDTO::getTimestamp, Comparator.nullsLast(Comparator.naturalOrder())).reversed());
 		int start = (pageno - 1)*10;
 		if(start >= qdtolist.size())
 			return null;
@@ -119,7 +119,7 @@ public class DTOService
 			qto.setDownvote(rservice.getquestiondownvotecount(qid));
 			qdtolist.add(qto);
 		}		
-		qdtolist.sort(Comparator.comparing(QuestionDTO::getTimestamp).reversed());
+		qdtolist.sort(Comparator.comparing(QuestionDTO::getTimestamp,Comparator.nullsLast(Comparator.naturalOrder())).reversed());
 		int start = (pageno - 1)*10;
 		if(start >= qdtolist.size())
 			return null;
@@ -205,4 +205,9 @@ public class DTOService
 			return false;
 		return true;
 	}	
+	
+	public List<Long> getquestiontags(long qid)
+	{
+		return qtservice.gettagids(qid);
+	}
 }

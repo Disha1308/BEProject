@@ -37,9 +37,9 @@ public class NegotiationService
 		if(qservice.validatequestionid(m.getQuestionid()))
 		{
 			NegotiationMessage msg = nRepo.findunique(m.getSeekerid(), m.getExpertid(), m.getQuestionid());
-			if(msg!= null)
+			if(msg== null)
 			{
-			if(m.getMessagestatus().equals("unread"))
+			if(m.getMessagestatus().equals(status.unread))
 			{
 				nRepo.save(m);
 				m = nRepo.findunique(m.getSeekerid(), m.getExpertid(), m.getQuestionid());
@@ -101,6 +101,7 @@ public class NegotiationService
 		return false;		
 	}
 	
+	//internal
 	public boolean validateNegotiationId(long nid)
 	{
 		NegotiationMessage nmsg = nRepo.findOne(nid);
@@ -109,6 +110,7 @@ public class NegotiationService
 		return true;
 	}
 	
+	//internal
 	public void addDiscussionnotification(NegotiationMessage m)
 	{
 		Notification n = new Notification();
@@ -125,7 +127,7 @@ public class NegotiationService
 		n1.setTimestamp(new Date()); //set current timestamp
 		n1.setState(notificationstatus.unread);
 		n1.setUserid(m.getExpertid());
-		notifyRepo.save(n);		
+		notifyRepo.save(n1);		
 	}
 	
 }

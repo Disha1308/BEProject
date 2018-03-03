@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-@ComponentScan({ "com.beproject.usermanagement.service", "com.beproject.usermanagement.rest" })
+@ComponentScan({ "com.beproject.usermanagement.service", "com.beproject.usermanagement.rest", "com.beproject.usermanagement.dto" })
 @EntityScan(basePackages = { "com.beproject.usermanagement.models" })
 @EnableJpaRepositories(basePackages = "com.beproject.usermanagement.repository")
 public class ApplicationConfig {

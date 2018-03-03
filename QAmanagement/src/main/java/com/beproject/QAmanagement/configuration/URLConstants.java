@@ -15,12 +15,11 @@ public interface URLConstants {
 	String POST_QUESTION_VOTE_URL = "/question/vote";//t
 	
 	String POST_QUESTION_URL = "/question"; //t
-	
+	String GET_QUESTION_TAG_URL = "/question/{questionid}/tags"; //t
 	
 	String POST_NEGOTIATION_URL = "/negotiate";
 	String PUT_NEGOTIATION_URL = "/negotiate/changestatus";
-	String GET_NOTIFICATION_URL ="/notification/{userid}";
 	
-
+	String GET_NOTIFICATION_URL ="/notification/{userid}";
 		
 }

@@ -1,11 +1,13 @@
 com/beproject/usermanagement/models/UserPreference.class
 com/beproject/usermanagement/service/UserMgmtService.class
 com/beproject/usermanagement/models/UserPreference$mode.class
+com/beproject/usermanagement/dto/ExpertDTOService.class
 com/beproject/usermanagement/rest/UserPreferenceController.class
 com/beproject/usermanagement/models/UserTopicStatus.class
 com/beproject/usermanagement/dto/ExpertDTO.class
 com/beproject/usermanagement/rest/UserTopicController.class
 com/beproject/usermanagement/service/UserPreferenceService.class
+com/beproject/usermanagement/dto/ExpertDTOService$1.class
 com/beproject/usermanagement/configurations/Application.class
 com/beproject/usermanagement/repository/UserTopicStatusRepository.class
 com/beproject/usermanagement/configurations/CORSFilter.class

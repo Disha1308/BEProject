@@ -17,7 +17,7 @@ public interface URLConstants {
 		static final String UNSUBSCRIBE_TAG_URL = "/{userid}/unsubscribe/{tagid}";//t
 		static final String GET_USER_INTERESTED_TAG_URL = "/interestedtags/{userid}"; //t
 		static final String GET_USER_EXPERTISE_TAG_URL = "/expertisetags/{userid}"; //t
-		static final String EXPERTS_URL = "/experts";
+		static final String EXPERTS_URL = "/experts/{questionid}";
 
 
 }

@@ -1,6 +1,6 @@
 package com.beproject.usermanagement.rest;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.inject.Named;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.beproject.usermanagement.configurations.URLConstants;
 import com.beproject.usermanagement.dto.ExpertDTO;
+import com.beproject.usermanagement.dto.ExpertDTOService;
 import com.beproject.usermanagement.models.*;
 import com.beproject.usermanagement.service.*;
 
@@ -32,6 +33,11 @@ public class UserTopicController
 	
 	@Autowired
 	UserPreferenceService upservice;
+	
+	@Autowired
+	ExpertDTOService eservice ;
+	
+	
 	
 	//for frontend. t
 	@POST
@@ -67,26 +73,13 @@ public class UserTopicController
 		 return tagservice.getexpertisetopics(userid);
 	}
 	
-	//for frontend still need to replace list long
-	@POST
+	//for frontend t
+	@GET
 	@Path(URLConstants.EXPERTS_URL)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ExpertDTO> getexpertsid(@RequestBody List<Long> topicidlist) {
+	public List<ExpertDTO> getexpertsid(@PathParam("questionid") long qid) {
 		System.out.println("in get experts rest");
-		List<Long> useridlist = tagservice.getexpertsmultipleTopics(topicidlist);
-		List<ExpertDTO> expertlist = new ArrayList<ExpertDTO>();
-		while(useridlist.iterator().hasNext())
-		{
-			long id = useridlist.iterator().next();
-			User u = uservice.getUserbyId(id);
-			UserPreference p = upservice.getByUserid(id);
-			ExpertDTO d = new ExpertDTO();
-			d.setId(u.getUserid());
-			d.setUsername(u.getUsername());
-			d.setPreference(p);
-			expertlist.add(d);
-		}
-		return expertlist;
+		return eservice.getexperts(qid);
 	}
 	
 }

@@ -118,6 +118,7 @@ public class UserTopicService
 		return null;	
 	}
 	
+	//t
 	public List<Long> getexperts(long topicid)
 	{
 		try{
@@ -136,7 +137,7 @@ public class UserTopicService
 		return null; //invalid topicid
 			
 	}
-	
+	//t
 	public List<Long> getexpertsmultipleTopics(List<Long> topicsid)
 	{
 		Iterator<Long> topicsit = topicsid.iterator();

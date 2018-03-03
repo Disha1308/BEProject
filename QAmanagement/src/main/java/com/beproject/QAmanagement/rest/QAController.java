@@ -106,5 +106,11 @@ public class QAController
 		return dservice.postquestion(q);
 	}
 	
+	@GET  //tested
+	@Path(URLConstants.GET_QUESTION_TAG_URL)
+	public List<Long> getQuestionTag(@PathParam("questionid") long qid) {
+		System.out.println("in get question tags controller");	
+		return dservice.getquestiontags(qid);
+		}
 	
 }
