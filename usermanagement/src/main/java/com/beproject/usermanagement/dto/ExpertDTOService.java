@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.beproject.usermanagement.dto.ExpertDTO.expertStatus;
 import com.beproject.usermanagement.models.User;
 import com.beproject.usermanagement.models.UserPreference;
 import com.beproject.usermanagement.service.UserMgmtService;
@@ -47,6 +48,13 @@ public class ExpertDTOService
 		List<Long> useridlist = tagservice.getexpertsmultipleTopics(topicidlist);
 		if(useridlist.size() == 0)
 			return null;	//no experts available
+		
+		//get list of expertid to whom already message is sent
+		 response = restT.exchange("http://localhost:8082/v1.0/negotiate/"+qid,
+			    HttpMethod.GET, null, new ParameterizedTypeReference <List<Long>>(){} );
+		
+		List<Long> unavailableexperts = response.getBody();
+		
 		List<ExpertDTO> expertlist = new ArrayList<ExpertDTO>();
 		int i=0;
 		while(i < useridlist.size())
@@ -58,6 +66,10 @@ public class ExpertDTOService
 			d.setId(u.getUserid());
 			d.setUsername(u.getUsername());
 			d.setPreference(p);
+			if(unavailableexperts != null && unavailableexperts.contains(id))
+				d.setAvailability(expertStatus.unavailable);
+			else
+				d.setAvailability(expertStatus.available);
 			expertlist.add(d);
 		}
 		return expertlist;

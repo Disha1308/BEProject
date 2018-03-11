@@ -4,10 +4,19 @@ import com.beproject.usermanagement.models.UserPreference;
 
 public class ExpertDTO 
 {
+	public enum expertStatus{available, unavailable};
+	
 	private long id;	
 	private String username;
 	private UserPreference preference;
+	private expertStatus availability;
 	
+	public expertStatus getAvailability() {
+		return availability;
+	}
+	public void setAvailability(expertStatus availability) {
+		this.availability = availability;
+	}
 	public long getId() {
 		return id;
 	}

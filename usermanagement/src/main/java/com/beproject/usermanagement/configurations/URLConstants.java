@@ -5,6 +5,7 @@ public interface URLConstants {
 		static final String GET_USER_URL = "/users/{email}"; //t
 		static final String GET_USER_ID_URL = "/users/id/{id}"; //t
 		static final String GET_USER_USERNAME_URL = "/users/username/{username}";//t
+		static final String GET_USERNAME_URL = "/username/{userid}";
 		static final String POST_USER_URL = "/users"; //t
 		static final String PUT_USER_URL = "/users/{id}";//t
 		static final String VALIDATE_USER_URL = "/validateuser/{id}";//t

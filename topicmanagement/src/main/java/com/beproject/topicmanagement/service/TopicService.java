@@ -72,7 +72,7 @@ public class TopicService {
 		}
 	}
 	
-	//used tested
+	
 	public boolean validatetopicid(long topicid)
 	{
 		if(topicRepo.findOne(topicid) != null)

@@ -1,5 +1,7 @@
 package com.beproject.QAmanagement.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,4 +14,7 @@ public interface NegotiationMessageRepository extends CrudRepository<Negotiation
 {
 	@Query("select n from NegotiationMessage n where n.seekerid=:sid and n.expertid=:eid and n.questionid=:qid")
 	public NegotiationMessage findunique(@Param("sid")long sid, @Param("eid") long eid,@Param("qid")long qid);
+	
+	@Query("select n.expertid from NegotiationMessage n where n.questionid=:qid")
+	public List<Long> getExperts(@Param("qid")long qid);
 }

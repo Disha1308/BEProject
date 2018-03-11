@@ -57,6 +57,14 @@ public class UserController {
 		User u = userServe.getUserbyUsername(username);
 		return u;
 	}
+	
+	@GET
+	@Path(URLConstants.GET_USERNAME_URL)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getUsername(@PathParam("userid") long uid) {
+		System.out.println("in get username controller");
+		return userServe.getUsername(uid);
+	}
 
 	//for frontend t
 	@POST

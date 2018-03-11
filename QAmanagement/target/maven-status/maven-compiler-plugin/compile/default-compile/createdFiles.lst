@@ -1,4 +1,5 @@
 com/beproject/QAmanagement/models/Question$mode.class
+com/beproject/QAmanagement/dto/NotificationDTOService.class
 com/beproject/QAmanagement/configuration/CORSFilter.class
 com/beproject/QAmanagement/service/NotificationService.class
 com/beproject/QAmanagement/rest/QAController.class
@@ -9,11 +10,13 @@ com/beproject/QAmanagement/service/NegotiationService.class
 com/beproject/QAmanagement/dto/AnswerDTO.class
 com/beproject/QAmanagement/configuration/URLConstants.class
 com/beproject/QAmanagement/service/QuestionTagService$3.class
+com/beproject/QAmanagement/dto/NotificationDTOService$1.class
 com/beproject/QAmanagement/repository/AnswerRepository.class
 com/beproject/QAmanagement/service/NegotiationService$1.class
 com/beproject/QAmanagement/repository/QuestionTagRepository.class
 com/beproject/QAmanagement/models/Question.class
 com/beproject/QAmanagement/models/NegotiationMessage$status.class
+com/beproject/QAmanagement/dto/NotificationDTO.class
 com/beproject/QAmanagement/configuration/ApplicationConfig$JerseyConfig.class
 com/beproject/QAmanagement/service/QuestionService.class
 com/beproject/QAmanagement/models/Notification.class

@@ -1,6 +1,7 @@
 package com.beproject.QAmanagement.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -12,7 +13,6 @@ import com.beproject.QAmanagement.models.NegotiationMessage.status;
 import com.beproject.QAmanagement.models.Notification.notificationstatus;
 import com.beproject.QAmanagement.models.Notification.notificationtype;
 import com.beproject.QAmanagement.repository.*;
-
 
 
 @Service
@@ -128,6 +128,11 @@ public class NegotiationService
 		n1.setState(notificationstatus.unread);
 		n1.setUserid(m.getExpertid());
 		notifyRepo.save(n1);		
+	}
+
+	public List<Long> getExperts(long qid)
+	{		
+		return nRepo.getExperts(qid);
 	}
 	
 }

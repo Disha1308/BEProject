@@ -11,6 +11,7 @@
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/configuration/Application.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/models/Answers.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/repository/AnswerRatingRepository.java
+/home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/dto/NotificationDTOService.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/repository/NegotiationMessageRepository.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/configuration/URLConstants.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/service/NotificationService.java
@@ -18,6 +19,7 @@
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/dto/QuestionDTO.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/models/Question.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/service/QuestionTagService.java
+/home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/dto/NotificationDTO.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/configuration/JsonDateDeserializer.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/repository/QuestionTagRepository.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/repository/AnswerRepository.java

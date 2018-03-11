@@ -93,4 +93,8 @@ public class UserMgmtService
 	{
 		return userRepo.search(str);
 	}
+
+	public String getUsername(long uid) {
+		return userRepo.findOne(uid).getUsername();
+	}
 }
