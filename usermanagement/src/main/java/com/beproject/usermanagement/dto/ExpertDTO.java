@@ -10,7 +10,14 @@ public class ExpertDTO
 	private String username;
 	private UserPreference preference;
 	private expertStatus availability;
+	private long answercount;
 	
+	public long getAnswercount() {
+		return answercount;
+	}
+	public void setAnswercount(long answercount) {
+		this.answercount = answercount;
+	}
 	public expertStatus getAvailability() {
 		return availability;
 	}

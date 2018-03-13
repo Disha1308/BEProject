@@ -25,6 +25,7 @@ public class Question implements Serializable {
 
 	public enum mode{offline, online};
 	public enum status{open,close};
+	public enum languages{english,french,german};
 	@Id
 	@GeneratedValue
 	private long questionid;

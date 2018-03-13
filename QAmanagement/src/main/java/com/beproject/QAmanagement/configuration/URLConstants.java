@@ -16,6 +16,7 @@ public interface URLConstants {
 	
 	String POST_QUESTION_URL = "/question";
 	String GET_QUESTION_TAG_URL = "/question/{questionid}/tags"; 
+	String GET_EXPERTANSWER_URL = "/{questionid}/expertanswers/{userid}";
 	
 	String POST_NEGOTIATION_URL = "/negotiate";
 	String POST_NEGOTIATION_MSGS_URL = "/negotiatemsgs/";

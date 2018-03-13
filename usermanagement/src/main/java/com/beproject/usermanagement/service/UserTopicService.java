@@ -127,6 +127,7 @@ public class UserTopicService
 			    HttpMethod.GET, null, boolean.class);
 		if(response.getBody()==true)
 		{
+			//to do sadd interested users as well
 			return statusRepo.findBytopicidnstatus(topicid, topicstatus.expertise);	
 		}
 		}

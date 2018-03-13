@@ -1,6 +1,7 @@
 com/beproject/usermanagement/models/UserPreference.class
 com/beproject/usermanagement/models/UserPreference$mode.class
 com/beproject/usermanagement/dto/ExpertDTO$expertStatus.class
+com/beproject/usermanagement/models/UserPreference$languages.class
 com/beproject/usermanagement/dto/ExpertDTOService.class
 com/beproject/usermanagement/models/UserTopicStatus.class
 com/beproject/usermanagement/dto/ExpertDTO.class

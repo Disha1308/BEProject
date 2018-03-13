@@ -64,12 +64,16 @@ public class ExpertDTOService
 			}
 			else
 			{
+				ResponseEntity<Long> cnt = restT.exchange("http://localhost:8082/v1.0/"+qid+"/expertanswers/"+id,
+					    HttpMethod.GET, null, Long.class );
+			
 			User u = uservice.getUserbyId(id);
 			UserPreference p = upservice.getByUserid(id);
 			ExpertDTO d = new ExpertDTO();
 			d.setId(u.getUserid());
 			d.setUsername(u.getUsername());
 			d.setPreference(p);
+			d.setAnswercount(cnt.getBody());
 			d.setAvailability(expertStatus.available);
 			expertlist.add(d);
 			}

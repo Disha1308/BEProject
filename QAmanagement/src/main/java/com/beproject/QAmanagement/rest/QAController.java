@@ -78,6 +78,14 @@ public class QAController
 		return dservice.getquestionanswer(qid);
 	}
 	
+	@GET //t
+	@Path(URLConstants.GET_EXPERTANSWER_URL)
+	@Produces(MediaType.APPLICATION_JSON)
+	public long getExpertsAnswers(@PathParam("questionid") long qid,@PathParam("userid") long uid) {
+		System.out.println("in get experts answer controller");	
+		return dservice.getanswercount(uid, qid);
+	}
+	
 	@POST // t
 	@Path(URLConstants.POST_ANSWER_URL)
 	public boolean postAnswer(@RequestBody Answers a) {

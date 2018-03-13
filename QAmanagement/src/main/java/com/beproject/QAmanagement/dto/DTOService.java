@@ -233,4 +233,23 @@ public class DTOService
 	{
 		return qtservice.gettagids(qid);
 	}
+	
+	public long getanswercount(long uid,long qid)
+	{
+		List<Answers> alist = aservice.getuseranswers(uid);
+		List<Long> askedquestiontag = qtservice.gettagids(qid);
+		int count = 0,i=0;
+		if(alist != null && askedquestiontag != null){
+		while(i < alist.size())
+		{
+			long question = alist.get(i).getQuestionid();
+			List<Long> ownerquestiontags = qtservice.gettagids(question);
+			ownerquestiontags.retainAll(askedquestiontag);
+			if(ownerquestiontags.size() > 0)
+				count++;
+			i++;			
+		}
+		}
+		return count;
+	}
 }

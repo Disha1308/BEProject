@@ -25,6 +25,9 @@ public class AnswerService
 	QuestionService qservice;
 	
 	@Autowired
+	QuestionTagService qtservice;
+	
+	@Autowired
 	NotificationRepository nRepo;
 	
 	Notification n;
