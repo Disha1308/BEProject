@@ -26,6 +26,9 @@ public class DTOService
 	@Autowired 
 	RatingService rservice;
 	
+	@Autowired
+	NotificationDTOService nservice;
+	
 	//tested
 	public List<QuestionDTO> getuserinterestedtopicQuestions(long userid, int pageno) 
 	{
@@ -47,6 +50,7 @@ public class DTOService
 			qto.setTagnamelist(qtservice.gettagsname(qtservice.gettagids(q.getQuestionid())));
 			qto.setUpvote(rservice.getquestionupvotecount(qid));
 			qto.setDownvote(rservice.getquestiondownvotecount(qid));
+			qto.setUsername(nservice.getusername(q.getUserid()));
 			qdtolist.add(qto);
 			}
 			i++;
@@ -82,6 +86,7 @@ public class DTOService
 			qto.setTagnamelist(qtservice.gettagsname(qtservice.gettagids(q.getQuestionid())));
 			qto.setUpvote(rservice.getquestionupvotecount(qid));
 			qto.setDownvote(rservice.getquestiondownvotecount(qid));
+			qto.setUsername(nservice.getusername(q.getUserid()));
 			qdtolist.add(qto);
 			}
 			i++;
@@ -117,6 +122,7 @@ public class DTOService
 			qto.setTagnamelist(qtservice.gettagsname(qtservice.gettagids(q.getQuestionid())));
 			qto.setUpvote(rservice.getquestionupvotecount(qid));
 			qto.setDownvote(rservice.getquestiondownvotecount(qid));
+			qto.setUsername(nservice.getusername(q.getUserid()));
 			qdtolist.add(qto);
 		}		
 		qdtolist.sort(Comparator.comparing(QuestionDTO::getTimestamp,Comparator.nullsLast(Comparator.naturalOrder())).reversed());
@@ -138,11 +144,16 @@ public class DTOService
 		while(i< alist.size())
 		{
 			Answers a = alist.get(i++);
-			AnswerDTO ato = new AnswerDTO();
-			ato.setAnswer(a);
-			ato.setUpvote(rservice.getanswerupvotecount(a.getAnswerid()));
-			ato.setDownvote(rservice.getanswerdownvotecount(a.getAnswerid()));
-			adtolist.add(ato);
+			AnswerDTO adto = new AnswerDTO();
+			adto.setAnswerid(a.getAnswerid());
+			adto.setAnswertext(a.getAnswerText());
+			adto.setQuestionid(a.getQuestionid());
+			adto.setTimestamp(a.getTimestamp());
+			adto.setQuestionTitle(nservice.getquestiontitle(a.getQuestionid()));
+			adto.setUsername(nservice.getusername(a.getUserid()));
+			adto.setUpvote(rservice.getanswerupvotecount(a.getAnswerid()));
+			adto.setDownvote(rservice.getanswerdownvotecount(a.getAnswerid()));
+			adtolist.add(adto);
 		}		
 		int start = (pageno - 1)*10;
 		if(start >= adtolist.size())
@@ -160,16 +171,28 @@ public class DTOService
 		List<Answers> alist = aservice.getbyquestionid(qid);
 		List<AnswerDTO> adtolist = new ArrayList<AnswerDTO>();
 		QADTO qa = new QADTO();
-		qa.setQuestion(q);
-		qa.setQuestionupvote(rservice.getquestionupvotecount(qid));
-		qa.setQuestiondownvote(rservice.getquestiondownvotecount(qid));
-		qa.setQtagname(qtservice.gettagsname(qtservice.gettagids(q.getQuestionid())));		
+		
+		QuestionDTO qto = new QuestionDTO();
+		qto.setQuestionid(qid);
+		qto.setTitle(q.getTitle());
+		qto.setState(q.getState());
+		qto.setTimestamp(q.getTimestamp());
+		qto.setTagnamelist(qtservice.gettagsname(qtservice.gettagids(q.getQuestionid())));
+		qto.setUpvote(rservice.getquestionupvotecount(qid));
+		qto.setDownvote(rservice.getquestiondownvotecount(qid));
+		qto.setUsername(nservice.getusername(q.getUserid()));
+		
+		qa.setQuestion(qto);
 		int i=0;
 		while(i< alist.size())
 		{
 			AnswerDTO adto = new AnswerDTO();
 			Answers a = alist.get(i++);
-			adto.setAnswer(a);
+			adto.setAnswerid(a.getAnswerid());
+			adto.setAnswertext(a.getAnswerText());
+			adto.setTimestamp(a.getTimestamp());
+			//adto.setQuestionTitle(nservice.getquestiontitle(a.getQuestionid()));
+			adto.setUsername(nservice.getusername(a.getUserid()));
 			adto.setUpvote(rservice.getanswerupvotecount(a.getAnswerid()));
 			adto.setDownvote(rservice.getanswerdownvotecount(a.getAnswerid()));
 			adtolist.add(adto);

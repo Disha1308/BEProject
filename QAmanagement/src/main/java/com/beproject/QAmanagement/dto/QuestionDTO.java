@@ -16,9 +16,15 @@ public class QuestionDTO
 	private long downvote;
 	private status state;
 	private List<String> tagnamelist;
-	
 	private Date timestamp; //question timestamp
+	private String username;
 	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getTimestamp() {
 		return timestamp;

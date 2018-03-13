@@ -33,8 +33,7 @@ public class ExpertDTOService
 	
 	public List<ExpertDTO> getexperts(long qid) {
 		System.out.println("in get experts dto service");
-		
-		
+			
 		try{
 			RestTemplate restT = new RestTemplate();
 		ResponseEntity<List<Long>> response = restT.exchange("http://localhost:8082/v1.0/question/"+qid+"/tags",
@@ -60,17 +59,20 @@ public class ExpertDTOService
 		while(i < useridlist.size())
 		{
 			long id = useridlist.get(i++);
+			if(unavailableexperts != null && unavailableexperts.contains(id))
+			{
+			}
+			else
+			{
 			User u = uservice.getUserbyId(id);
 			UserPreference p = upservice.getByUserid(id);
 			ExpertDTO d = new ExpertDTO();
 			d.setId(u.getUserid());
 			d.setUsername(u.getUsername());
 			d.setPreference(p);
-			if(unavailableexperts != null && unavailableexperts.contains(id))
-				d.setAvailability(expertStatus.unavailable);
-			else
-				d.setAvailability(expertStatus.available);
+			d.setAvailability(expertStatus.available);
 			expertlist.add(d);
+			}
 		}
 		return expertlist;
 	}

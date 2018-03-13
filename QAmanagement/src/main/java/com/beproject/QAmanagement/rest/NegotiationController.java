@@ -37,6 +37,19 @@ public class NegotiationController
 		return nserve.createNegotiation(m);
 	}
 	
+	@POST
+	@Path(URLConstants.POST_NEGOTIATION_MSGS_URL)
+	public boolean postnegotiationmessages(@RequestBody List<NegotiationMessage> mlist) {
+		System.out.println("in post multiple negotiation message controller");	
+		int i=0;
+		while(i<mlist.size())
+		{
+		 if(!nserve.createNegotiation(mlist.get(i++)))
+			 return false;
+		}
+		return true;
+	}
+	
 	@PUT
 	@Path(URLConstants.PUT_NEGOTIATION_URL)
 	@Produces(MediaType.APPLICATION_JSON)

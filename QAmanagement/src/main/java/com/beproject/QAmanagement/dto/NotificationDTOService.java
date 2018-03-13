@@ -112,11 +112,11 @@ public class NotificationDTOService
 		return ndto;
 	}
 
-	private String getquestiontitle(long qid) {	
+	public String getquestiontitle(long qid) {	
 		return qRepo.findOne(qid).getTitle();
 	}
 
-	private String getusername(long userid) {
+	public String getusername(long userid) {
 		try{
 		RestTemplate restT = new RestTemplate();
 		ResponseEntity<String> response = restT.exchange("http://localhost:8080/v1.0/username/"+userid,
