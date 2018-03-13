@@ -118,7 +118,9 @@ public class QuestionTagService
 		int i=0;
 		while(i<tagidlist.size())
 		{
-			qidlist.addAll(getquestions(tagidlist.get(i)));
+			List<Long> qlist = getquestions(tagidlist.get(i));
+			if(qlist != null)
+				qidlist.addAll(qlist);
 			i++;
 		}
 		return qidlist;		
