@@ -183,6 +183,10 @@ public class DTOService
 		qto.setUsername(nservice.getusername(q.getUserid()));
 		
 		qa.setQuestion(qto);
+		qa.setQuestiontext(q.getQuestionText());
+		qa.setPreferredLanguage(q.getPreferredLanguage());
+		qa.setCommunicationMode(q.getCommunicationMode());
+		qa.setPreferredTime(q.getPreferredTime());
 		int i=0;
 		while(i< alist.size())
 		{

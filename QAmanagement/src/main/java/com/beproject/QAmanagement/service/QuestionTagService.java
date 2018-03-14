@@ -26,13 +26,6 @@ public class QuestionTagService
 	@Autowired
 	QuestionService qservice;
 	
-	QuestionTag qt; 
-	
-	QuestionTagService()
-	{
-		qt = new QuestionTag();
-	}
-	
 	//used tested
 	public boolean addtag(QuestionTag t)
 	{
@@ -67,6 +60,7 @@ public class QuestionTagService
 			return false;
 		while(i < tagidlist.size())
 		{
+			QuestionTag qt = new QuestionTag();
 			qt.setQuestionid(qid);
 			qt.setTagid(tagidlist.get(i++));
 			addtag(qt);
