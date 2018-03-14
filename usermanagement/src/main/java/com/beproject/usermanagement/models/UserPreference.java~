@@ -20,7 +20,7 @@ public class UserPreference implements Serializable
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long preferenceid;
 	
-	private languages communicationLang;
+	private String communicationLang;
 	private mode communicationMode;
 	
 	private Time startTime;

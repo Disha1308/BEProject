@@ -1,7 +1,6 @@
 	package com.beproject.QAmanagement.rest;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.inject.Named;
@@ -11,14 +10,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.beproject.QAmanagement.configuration.URLConstants;
 import com.beproject.QAmanagement.dto.*;
 import com.beproject.QAmanagement.models.*;
@@ -121,4 +115,12 @@ public class QAController
 		return dservice.getquestiontags(qid);
 		}
 	
+	
+	@GET
+	@Path(URLConstants.GET_PAGENO_URL)
+	public long getpageno(@PathParam("topictype") String type,@PathParam("userid") long uid)
+	{
+		System.out.println("in get pageno controller");	
+		return dservice.getpageno(type,uid);
+	}
 }

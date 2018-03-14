@@ -273,7 +273,7 @@ public class DTOService
                         if(qlist != null)
                                 return (qlist.size()/10)+1;
                 }
-                else if(type.equalsIgnoreCase("answers"))
+                else if(type.equalsIgnoreCase("answer"))
                 {
                         List<Answers> alist = aservice.getuseranswers(uid);
                         if(alist != null)

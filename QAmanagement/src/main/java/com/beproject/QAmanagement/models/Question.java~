@@ -74,7 +74,7 @@ public class Question implements Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public languages getPreferredLanguage() {
+	public String getPreferredLanguage() {
 		return preferredLanguage;
 	}
 	public void setPreferredLanguage(languages preferredLanguage) {

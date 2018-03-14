@@ -4,6 +4,7 @@ public interface URLConstants {
 
 	String GET_USER_INTRESTED_QUESTIONS_URL = "/user/{userid}/interestedquestions/{pageno}";
 	String GET_USER_EXPERTISE_QUESTIONS_URL = "/user/{userid}/expertisequestions/{pageno}";
+	String GET_PAGENO_URL = "/pageno/{topictype}/{userid}";
 	
 	String GET_USER_ASKED_URL = "/user/{userid}/askedquestions/{pageno}";
 	String GET_USER_ANSWERS_URL = "/user/{userid}/answers/{pageno}";	
