@@ -1,5 +1,6 @@
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/rest/NegotiationController.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/configuration/ApplicationConfig.java
+/home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/service/CosineSearch.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/models/QuestionTag.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/service/RatingService.java
 /home/robin/BEProject/UCAN/QAmanagement/src/main/java/com/beproject/QAmanagement/repository/NotificationRepository.java

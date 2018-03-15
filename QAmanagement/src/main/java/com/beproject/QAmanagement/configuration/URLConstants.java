@@ -26,5 +26,6 @@ public interface URLConstants {
 	
 	String GET_NOTIFICATION_URL ="/notification/{userid}/{pageno}";
 	String CHANGE_NOTIFCATION_STATUS_URL ="/notification/markread/{notificationid}";
-		
+	
+	String SEARCH_QUESTION_URL = "/search/{keywords}";
 }

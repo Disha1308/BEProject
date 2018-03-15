@@ -1,7 +1,7 @@
-	package com.beproject.QAmanagement.rest;
-
+package com.beproject.QAmanagement.rest;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Named;
 import javax.ws.rs.GET;
@@ -10,12 +10,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.beproject.QAmanagement.configuration.URLConstants;
 import com.beproject.QAmanagement.dto.*;
 import com.beproject.QAmanagement.models.*;
+import com.beproject.QAmanagement.service.CosineSearch;
 
 @RestController
 @Named
@@ -26,6 +29,8 @@ public class QAController
 	@Autowired
 	DTOService dservice;
 	
+	@Autowired
+	CosineSearch s;
 	
 	//for frontend tested
 	@GET
@@ -122,5 +127,15 @@ public class QAController
 	{
 		System.out.println("in get pageno controller");	
 		return dservice.getpageno(type,uid);
+	}
+	
+	
+	@GET
+	@Path(URLConstants.SEARCH_QUESTION_URL)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Set<String> searchrelatedquestions(@PathParam("keywords") String keywords)
+	{
+		System.out.println("in search question controller");
+		return s.search(keywords);
 	}
 }

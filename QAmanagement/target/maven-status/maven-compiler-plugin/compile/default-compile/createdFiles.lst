@@ -1,4 +1,5 @@
 com/beproject/QAmanagement/configuration/CORSFilter.class
+com/beproject/QAmanagement/service/CosineSearch$values.class
 com/beproject/QAmanagement/service/AnswerService.class
 com/beproject/QAmanagement/dto/AnswerDTO.class
 com/beproject/QAmanagement/configuration/URLConstants.class
@@ -45,4 +46,5 @@ com/beproject/QAmanagement/models/QuestionRating.class
 com/beproject/QAmanagement/repository/QuestionRatingRepository.class
 com/beproject/QAmanagement/models/NegotiationMessage.class
 com/beproject/QAmanagement/models/Question$status.class
+com/beproject/QAmanagement/service/CosineSearch.class
 com/beproject/QAmanagement/configuration/JsonDateSerializer.class
