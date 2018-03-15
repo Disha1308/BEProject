@@ -43,11 +43,11 @@ public class UserPreferenceController {
 	}*/
 
 	//for frontend. t
-	@PUT
-	@Path(URLConstants.PUT_USER_PREFERENCE_URL)
+	@POST
+	@Path(URLConstants.POST_USER_PREFERENCE_URL)
 	@Produces(MediaType.APPLICATION_JSON)
 	public boolean updateUser(@RequestBody UserPreference u, @PathParam("userid") long id) {
-		System.out.println("in put user preference rest");
+		System.out.println("in post user preference rest");
 		return preferenceServe.updateUserPreference(u, id);
 	}
 

@@ -31,7 +31,7 @@ public class QuestionService {
 	}
 	 
 	//used t
-	public boolean createQuestion(Question q)
+	public long createQuestion(Question q)
 	{
 		System.out.println("in create question service");
 		try {
@@ -39,11 +39,17 @@ public class QuestionService {
 			{
 			q.setTimestamp(new Date());
 			questionRepo.save(q);
-			return true;
+			System.out.println(q.getUserid()+q.getTitle());
+			q = questionRepo.findunique(q.getUserid(), q.getTitle());
+			if(q != null)
+				{
+				System.out.println("question created with id"+q.getQuestionid());
+				return q.getQuestionid();
+				}
 			}
-			return false;
+			return -1;
 		} catch (Exception e) {
-			return false;
+			return -1;
 		}
 	}
 	

@@ -1,11 +1,14 @@
 package com.beproject.usermanagement.service;
 
+import java.sql.Time;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.beproject.usermanagement.models.*;
+import com.beproject.usermanagement.models.UserPreference.languages;
+import com.beproject.usermanagement.models.UserPreference.mode;
 import com.beproject.usermanagement.repository.*;
 
 @Service
@@ -13,6 +16,9 @@ public class UserMgmtService
 {
 	@Autowired
 	UserRepository userRepo;
+	
+	@Autowired
+	UserPreferenceRepository userpRepo;
 	
 	public User getUserbyEmail(String email)
 	{
@@ -53,6 +59,16 @@ public class UserMgmtService
 		{
 		try {
 			userRepo.save(u);
+			
+			long uid = userRepo.findByemail(u.getEmail()).getUserid();
+			UserPreference up = new UserPreference();
+			up.setCommunicationLang(languages.English);
+			up.setCommunicationMode(mode.Offline);
+			up.setStartTime(new Time(0));
+			up.setEndTime(new Time(0));
+			up.setUserid(uid);
+			userpRepo.save(up);
+			
 			return true;
 		} catch (Exception e) {
 			return false;

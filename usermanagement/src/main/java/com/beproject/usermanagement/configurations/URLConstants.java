@@ -11,7 +11,7 @@ public interface URLConstants {
 		static final String VALIDATE_USER_URL = "/validateuser/{id}";//t
 		static final String SEARCH_USER_URL = "/searchuser/{str}";	//t
 		
-		static final String PUT_USER_PREFERENCE_URL = "/userpreference/{userid}"; //t
+		static final String POST_USER_PREFERENCE_URL = "/userpreference/{userid}"; //t
 		static final String GET_USER_PREFERENCE_URL = "/userpreference/{userid}"; //t
 		
 		static final String SUBSCRIBE_TAG_URL = "/subscribe";//t

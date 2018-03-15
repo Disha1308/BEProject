@@ -225,12 +225,13 @@ public class DTOService
 	}
 	
 	//tested
-	public boolean postquestion(PostQuestionDTO q) {
-		if(!qservice.createQuestion(q.getQuestion()))
-			return false;
+	public long postquestion(PostQuestionDTO q) {
+		long qid = qservice.createQuestion(q.getQuestion());
+		if(qid == -1)
+			return -1;
 		if(!qtservice.addmultipletopics(q.getQuestion().getQuestionid(), q.getTagid()))
-			return false;
-		return true;
+			return -1;
+		return qid;
 	}	
 	
 	public List<Long> getquestiontags(long qid)

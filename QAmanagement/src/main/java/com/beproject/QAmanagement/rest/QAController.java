@@ -103,7 +103,7 @@ public class QAController
 	
 	@POST  //tested
 	@Path(URLConstants.POST_QUESTION_URL)
-	public boolean postQuestion(@RequestBody PostQuestionDTO q) {
+	public long postQuestion(@RequestBody PostQuestionDTO q) {
 		System.out.println("in post question controller");	
 		return dservice.postquestion(q);
 	}

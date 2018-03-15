@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Table(name = "UserPreference")
 public class UserPreference implements Serializable
 {
-	enum mode {offline,online}
-	enum languages{english,french,german};
+	public enum mode {Offline,Online}
+	public enum languages{English,French,German};
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long preferenceid;

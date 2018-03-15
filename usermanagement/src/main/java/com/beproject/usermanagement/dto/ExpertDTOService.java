@@ -55,8 +55,8 @@ public class ExpertDTOService
 		List<Long> unavailableexperts = response.getBody();
 		
 		List<ExpertDTO> expertlist = new ArrayList<ExpertDTO>();
-		int i=0;
-		while(i < useridlist.size())
+		int i=0,expertcount=0;
+		while(i < useridlist.size() && expertcount < 10)
 		{
 			long id = useridlist.get(i++);
 			if(unavailableexperts != null && unavailableexperts.contains(id))
@@ -75,6 +75,7 @@ public class ExpertDTOService
 			d.setPreference(p);
 			d.setAnswercount(cnt.getBody());
 			d.setAvailability(expertStatus.available);
+			expertcount++;
 			expertlist.add(d);
 			}
 		}

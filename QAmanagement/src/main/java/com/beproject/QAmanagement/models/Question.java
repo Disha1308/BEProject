@@ -23,9 +23,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @Table(name = "Questions")
 public class Question implements Serializable {
 
-	public enum mode{offline, online};
-	public enum status{open,close};
-	public enum languages{english,french,german};
+	public enum mode{Offline, Online};
+	public enum status{Open,Close};
+	public enum languages{English,French,German};
 	@Id
 	@GeneratedValue
 	private long questionid;
