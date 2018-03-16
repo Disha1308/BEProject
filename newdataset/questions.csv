@@ -1,0 +1,38 @@
+"questionid","communication_mode","preferred_language","preferred_time","question_text","state","timestamp","title","userid"
+"21",1,1,"2018-03-24 14:00:00","Regards to the following code:   int[] to = new int[] { text };
+I understand it tries to define an array of integer, but What does the curly braces do in array definition?
+",0,"2018-03-24 11:00:00","curly braces when define array","8"
+"22",0,0,"","Most of the questions Ive found are biased on the fact theyre looking for letters in their numbers, whereas Im looking for numbers in what Id like to be a numberless string. I need to enter a string and check to see if it contains any numbers and if it does reject it.
+the function isdigit() only returns true if ALL of the characters are numbers. I just want to see if the user has entered a number so a sentence like """"I own 1 dog"""" or something.
+Any ideas?",0,"2018-03-24 12:00:00","check if a string contains a number","6"
+"23",0,2,"","Is there a way to convert a string from uppercase, or even part uppercase to lowercase?
+E.g. Kilometers --> kilometers.",0,"2018-03-25 12:00:00","How to convert string to lowercase in Python","5"
+"24",0,2,"","90
+down vote
+favorite
+4
+Whats the recommended Python idiom for splitting a string on the last occurrence of the delimiter in the string? example:
+# instead of regular split
+>> s = """"a,b,c,d""""
+>> s.split("""","""")
+>> [ a , b, c, d]
+# ..split only on last occurrence of "","" in string:
+>>> s.mysplit(s, -1)
+>>> [""a,b,c"", ""d""]
+mysplit takes a second argument that is the occurrence of the delimiter to be split. Like in regular list indexing, -1 means the last from the end. How can this be done?",0,"2018-03-23 10:00:00","Splitting on last delimiter in Python string?","5"
+"25",1,2,"2018-03-22 11:00:00","Code:
+char[] pas = {a,b,c};
+System.out.println(pas);
+System.out.println(""""""""+pas);
+Output:
+abc
+[C@3d04a311
+Why is the variable accessed prints value and address ?
+",0,"2018-03-20 10:00:00","Difference between printing the value of a variable with and without using + operator? ","1"
+"26",0,0,"","I want regular expression to find & replace first and third rownum word in the below-given string with the word NONE.
+String str = """"select dummy,rownum,rowid as \""""rownum\"""",rownum as order_number from dual"""";
+I have tried below regular expression but it replacing the comma , before or after the word rownum
+str = str.replaceAll(""""(?i)[^\""""A-Z0-9]rownum[^$\""""A-Z0-9]"""","""" NONE """")
+Actual Output : select dummy NONE rowid as """"rownum"""" NONE as order_number from dual
+Expected Output : select dummy,NONE, rowid as """"rownum"""",NONE as order_number from dual
+",1,"2018-03-20 10:00:00","Regular Expression to find & replace specific substring","4"

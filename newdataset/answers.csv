@@ -1,0 +1,79 @@
+"answerid","answer_text","questionid","timestamp","userid"
+"31","The curly braces contain values to populate the array.","21","","2"
+"32","This is just a shortcut code to create an array with initial elements, the followings (which are equal):
+    int[] to = new int[] { text };
+    int[] to = { text };
+can be substituted with
+    int[] to = new int[1];
+    to[0] = text;
+Hope this helps.","21","","1"
+"33","This syntax allows you to define the contents of an array and is often referred to as an array literal.
+In this context this can actually be simplified to:
+int[] to = { 1, 2, 7, etc. };
+Adding new int[] before it is only required when not part of an assignment, something like:
+someFunction(new int[]{1, 3, 5});","21","","5"
+"34","""You can use any function, with the str.isdigit function, like this
+>>> def hasNumbers(inputString):
+...     return any(char.isdigit() for char in inputString)
+... 
+>>> hasNumbers(""""I own 1 dog"""")
+True
+>>> hasNumbers(""""I own no dog"""")
+False
+Alternatively you can use a Regular Expression, like this
+>>> import re
+>>> def hasNumbers(inputString):
+...     return bool(re.search(r \d, inputString))
+... 
+>>> hasNumbers(""""I own 1 dog"""")
+True
+>>> hasNumbers(""""I own no dog"""")
+False","22","","4"
+"35","You can use a combination of any and str.isdigit:
+def num_there(s):
+    return any(i.isdigit() for i in s)
+The function will return True if a digit exists in the string, otherwise False.
+Demo:
+>>> king = I shall have 3 cakes
+>>> num_there(king)
+True
+>>> servant = I do not have any cakes
+>>> num_there(servant)
+False","22","","5"
+"36","use
+str.isalpha() Ref: https://docs.python.org/2/library/stdtypes.html#str.isalpha
+Return true if all characters in the string are alphabetic and there is at least one character, false otherwise.","22","","7"
+"37","s = """"Kilometer""""
+print(s.lower())
+The official documentation is str.lower().
+","23","","7"
+"38","This doesnt work for non-English words in UTF-8. In this case decode(utf-8) can help:
+>>> s=Километр
+>>> print s.lower()
+Километр
+>>> print s.decode(utf-8).lower()
+"",""You can do what Peter said, or if you want the user to input something you could do this:
+raw_input(Type Something).lower()
+It will then automatically convert the thing they typed into lowercase.
+Note: raw_input was renamed to input in Python 3.x and above.
+","23","","4"
+"39","Also, you can overwrite some variables:
+s = input(UPPER CASE)
+lower = s.lower()
+If you use like this:
+s = """"Kilometer""""
+print(s.lower())     - kilometer
+print(s)             - Kilometer
+It will work just when called.
+","23","","5"
+"40","The difference is that System.out.println(pas); calls println(char[] x) while System.out.println(""""""""+pas); calls println(String x) which calls the default toStringimplementation (the one in class Object)""
+","25","","1"
+"41","You can use rsplit
+string.rsplit(delimeter,1)[1]
+To get the string from reverse.","24","","4"
+"42","If you want to avoid replacing """"rownum"""" because it is surrounded by """" then you can use look-around mechanisms to forbid """" before or after it like
+String str = """"select dummy,rownum,rowid as \""""rownum\"""",rownum as order_number from dual"""";
+str = str.replaceAll(""""(?i)(?!<\"""")\\brownum\\b(?!\"""")"""","""" NONE """");
+System.out.println(str);
+Output: select dummy, NONE ,rowid as """"rownum"""", NONE  as order_number from dual
+But that solution is valid only for this particular scenario. If you have other ones you should search for SQL parsers instead of RegEx.","26","","4"

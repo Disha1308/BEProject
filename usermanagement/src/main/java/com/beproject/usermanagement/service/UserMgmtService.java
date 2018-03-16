@@ -61,13 +61,16 @@ public class UserMgmtService
 			userRepo.save(u);
 			
 			long uid = userRepo.findByemail(u.getEmail()).getUserid();
-			UserPreference up = new UserPreference();
+			UserPreference up = userpRepo.findByuserid(uid);
+			if(up == null)
+					{up = new UserPreference();
 			up.setCommunicationLang(languages.English);
 			up.setCommunicationMode(mode.Offline);
 			up.setStartTime(new Time(0));
 			up.setEndTime(new Time(0));
 			up.setUserid(uid);
 			userpRepo.save(up);
+			}
 			
 			return true;
 		} catch (Exception e) {
