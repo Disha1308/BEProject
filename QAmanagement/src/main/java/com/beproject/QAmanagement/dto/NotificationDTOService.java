@@ -77,15 +77,18 @@ public class NotificationDTOService
 		Answers a = aRepo.findOne(n.getAttributeid());
 		ndto.setQuestionid(a.getQuestionid());
 		ndto.setUsername(getusername(a.getUserid()));
-		ndto.setQuestiontitle(getquestiontitle(a.getQuestionid()));
+		ndto.setQuestiontitle(qRepo.findOne(a.getQuestionid()).getQuestionText());
+		ndto.setPrefferedtimestamp(a.getTimestamp());
 		return ndto;
 	}
 	
 	private NotificationDTO getType2Dto(Notification n) {
 		NotificationDTO ndto = new NotificationDTO();
 		NegotiationMessage nmsg = negoRepo.findOne(n.getAttributeid());
+		Question q = qRepo.findOne(nmsg.getQuestionid());
 		ndto.setQuestionid(nmsg.getQuestionid());
-		ndto.setQuestiontitle(getquestiontitle(nmsg.getQuestionid()));
+		ndto.setQuestiontitle(q.getQuestionText());
+		ndto.setPrefferedtimestamp(q.getPreferredTime());
 		if(n.getUserid() == nmsg.getSeekerid())
 			ndto.setUsername(getusername(nmsg.getExpertid()));
 		else
@@ -96,9 +99,11 @@ public class NotificationDTOService
 	private NotificationDTO getType3Dto(Notification n) {
 		NotificationDTO ndto = new NotificationDTO();
 		NegotiationMessage nmsg = negoRepo.findOne(n.getAttributeid());
+		Question q = qRepo.findOne(nmsg.getQuestionid());
 		ndto.setUsername(getusername(nmsg.getExpertid()));
 		ndto.setQuestionid(nmsg.getQuestionid());
-		ndto.setQuestiontitle(getquestiontitle(nmsg.getQuestionid()));
+		ndto.setQuestiontitle(q.getQuestionText());
+		ndto.setPrefferedtimestamp(q.getPreferredTime());
 		ndto.setNegotiationStatus(nmsg.getMessagestatus().toString());
 		return ndto;
 	}
@@ -106,16 +111,15 @@ public class NotificationDTOService
 	private NotificationDTO getType4Dto(Notification n) {
 		NotificationDTO ndto = new NotificationDTO();
 		NegotiationMessage nmsg = negoRepo.findOne(n.getAttributeid());
+		Question q = qRepo.findOne(nmsg.getQuestionid());
 		ndto.setUsername(getusername(nmsg.getSeekerid()));
 		ndto.setQuestionid(nmsg.getQuestionid());
-		ndto.setQuestiontitle(getquestiontitle(nmsg.getQuestionid()));
+		ndto.setQuestiontitle(q.getQuestionText());
+		ndto.setPrefferedtimestamp(q.getPreferredTime());
 		return ndto;
 	}
 
-	public String getquestiontitle(long qid) {	
-		return qRepo.findOne(qid).getTitle();
-	}
-
+	
 	public String getusername(long userid) {
 		try{
 		RestTemplate restT = new RestTemplate();
@@ -139,6 +143,10 @@ public class NotificationDTOService
 		return true;
 		}
 		return false;
+	}
+
+	public String getquestiontitle(long questionid) {
+		return qRepo.findOne(questionid).getQuestionText();
 	}
 	
 }

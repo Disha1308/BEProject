@@ -133,7 +133,7 @@ public class QAController
 	@GET
 	@Path(URLConstants.SEARCH_QUESTION_URL)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Set<String> searchrelatedquestions(@PathParam("keywords") String keywords)
+	public Set<Question> searchrelatedquestions(@PathParam("keywords") String keywords)
 	{
 		System.out.println("in search question controller");
 		return s.search(keywords);

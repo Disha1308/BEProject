@@ -15,8 +15,16 @@ public class NotificationDTO
 	private notificationstatus state;
 	private String negotiationStatus;
 	private long questionid;
-	private Date timestamp; //question timestamp
+	private Date timestamp; //notification timestamp
+	private Date prefferedtimestamp;
 	
+	@JsonSerialize(using=JsonDateSerializer.class)
+	public Date getPrefferedtimestamp() {
+		return prefferedtimestamp;
+	}
+	public void setPrefferedtimestamp(Date prefferedtimestamp) {
+		this.prefferedtimestamp = prefferedtimestamp;
+	}
 	public long getNotificationid() {
 		return notificationid;
 	}

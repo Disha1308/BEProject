@@ -11,6 +11,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.beproject.QAmanagement.models.Question;
 import com.beproject.QAmanagement.repository.QuestionRepository;
 
 @Component
@@ -119,22 +120,24 @@ public class CosineSearch
 
      }
 	 
-	 public Set<String> search(String keywords)
+	 public Set<Question> search(String keywords)
 	 {
-		 List<String> documents = qrepo.getdocuments();
-		 Map<String, Double> documents_score = new HashMap<String, Double>();
+		 List<Question> documents = (List<Question>) qrepo.findAll();
+		 Map<Question, Double> documents_score = new HashMap<Question, Double>();
          
 		 int i =0 ;
 		 while(documents != null && i<documents.size())
 		 {
-			double csvalue =  Cosine_Similarity_Score(keywords,documents.get(i));
+			double csvalue =  Cosine_Similarity_Score(keywords,documents.get(i).getQuestionText());
+			if(csvalue > 0)
 			 documents_score.put(documents.get(i), csvalue); 
-			 System.out.println("cosine sim:"+documents.get(i)+":"+csvalue);
+			 System.out.println("cosine sim:"+documents.get(i).getQuestionText()+":"+csvalue);
 			 i++;
 		 }
 		documents_score.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()));
 		
-		Set<String> result = (documents_score.keySet());
+		Set<Question> result = (documents_score.keySet());
+		result.stream().limit(5);
 		return result;
 	 }
 	 

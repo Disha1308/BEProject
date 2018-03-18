@@ -1,9 +1,8 @@
-"userid","contact","country","email","name","password","username"
-"1","""9874561231""","""India""","""akshat@gmail.com""","""Akshat""","""12345""","""akshat123"""
-"2","""9874561231""","""India""","""komal@gmail.com""","""Komal""","""12345""","""komal123"""
-"3","""9874561231""","""India""","""tushita@gmail.com""","""Tushita""","""12345""","""tushita123"""
-"4","""9874561231""","""India""","""nikita@gmail.com""","""Nikita""","""12345""","""nikita123"""
-"5","""9874561231""","""India""","""mehul@gmail.com""","""Mehul""","""12345""","""mehul123"""
-"6","9785461231","india","disha@gmail.com","Disha Dinesh Agrawal","disha1308","disha1308"
-"7","""9874561231""","""India""","""""","""Manisha""","""12345""","""manisha123"""
-"8","""9874561231""","""India""","""dinesh@gmail.com""","""Dinesh""","""dinesh""","""dinesh123"""
+1,9874561231,India,akshat@gmail.com,Akshat,12345,akshat123
+2,9874561231,India,komal@gmail.com,Komal,12345,komal123
+3,9874561231,India,tushita@gmail.com,Tushita,12345,tushita123
+4,9874561231,India,nikita@gmail.com,Nikita,12345,nikita123
+5,9874561231,India,mehul@gmail.com,Mehul,12345,mehul123
+6,9785461231,india,disha@gmail.com,Disha Dinesh Agrawal,disha1308,disha1308
+7,9874561231,India,,Manisha,12345,manisha123
+8,9874561231,India,dinesh@gmail.com,Dinesh,dinesh,dinesh123
