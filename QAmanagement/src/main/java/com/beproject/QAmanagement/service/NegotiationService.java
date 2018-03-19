@@ -68,10 +68,11 @@ public class NegotiationService
 		//todo validate expertid
 		if(qservice.validatequestionid(m.getQuestionid()))
 		{
-			NegotiationMessage msg = nRepo.findunique(m.getSeekerid(), m.getExpertid(), m.getQuestionid());
+			NegotiationMessage msg = nRepo.findunique(m.getExpertid(), m.getQuestionid());
 			if(msg!= null)
 			{
 				m.setMessageid(msg.getMessageid());
+				m.setSeekerid(msg.getSeekerid());
 				nRepo.save(m); //update status
 				
 				//create notification
