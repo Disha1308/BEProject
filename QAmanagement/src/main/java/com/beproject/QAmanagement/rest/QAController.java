@@ -29,8 +29,6 @@ public class QAController
 	@Autowired
 	DTOService dservice;
 	
-	@Autowired
-	CosineSearch s;
 	
 	//for frontend tested
 	@GET
@@ -133,9 +131,9 @@ public class QAController
 	@GET
 	@Path(URLConstants.SEARCH_QUESTION_URL)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Set<Question> searchrelatedquestions(@PathParam("keywords") String keywords)
+	public List<QuestionDTO> searchrelatedquestions(@PathParam("keywords") String keywords)
 	{
 		System.out.println("in search question controller");
-		return s.search(keywords);
+		return dservice.search(keywords);
 	}
 }

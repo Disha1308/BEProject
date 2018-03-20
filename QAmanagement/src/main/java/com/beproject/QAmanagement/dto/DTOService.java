@@ -3,6 +3,7 @@ package com.beproject.QAmanagement.dto;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,10 @@ public class DTOService
 	
 	@Autowired
 	NotificationDTOService nservice;
+	
+	@Autowired
+	CosineSearch s;
+	
 	
 	//tested
 	public List<QuestionDTO> getuserinterestedtopicQuestions(long userid, int pageno) 
@@ -287,6 +292,32 @@ public class DTOService
 
 		return 0;
 	 }
+
+	public List<QuestionDTO> search(String keywords) 
+	{
+		Set<Question> qlist = s.search(keywords);
+		List<QuestionDTO> qdtolist = new ArrayList<QuestionDTO>();
+		int i =0;
+		while(i<qlist.size() && qlist.iterator().hasNext())
+		{
+		
+			Question q = qlist.iterator().next();
+			long qid = q.getQuestionid();
+		QuestionDTO qto = new QuestionDTO();
+		qto.setQuestionid(q.getQuestionid());
+		qto.setTitle(q.getTitle());
+		qto.setState(q.getState());
+		qto.setTimestamp(q.getTimestamp());
+		qto.setTagnamelist(qtservice.gettagsname(qtservice.gettagids(q.getQuestionid())));
+		qto.setUpvote(rservice.getquestionupvotecount(qid));
+		qto.setDownvote(rservice.getquestiondownvotecount(qid));
+		qto.setUsername(nservice.getusername(q.getUserid()));
+		
+		qdtolist.add(qto);
+		i++;
+		}
+		return qdtolist;
+	}
 
 	
 }

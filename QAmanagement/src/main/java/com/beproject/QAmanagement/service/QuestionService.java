@@ -53,10 +53,7 @@ public class QuestionService {
 		}
 	}
 	
-	public List<Question> searchquestion(String s)
-	{
-		return questionRepo.search(s);
-	}
+	
 	
 	//used
 	public boolean validatequestionid(long qid)

@@ -3,6 +3,7 @@ package com.beproject.QAmanagement.dto;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,10 @@ public class DTOService
 	
 	@Autowired
 	NotificationDTOService nservice;
+	
+	@Autowired
+	CosineSearch s;
+	
 	
 	//tested
 	public List<QuestionDTO> getuserinterestedtopicQuestions(long userid, int pageno) 
@@ -183,6 +188,10 @@ public class DTOService
 		qto.setUsername(nservice.getusername(q.getUserid()));
 		
 		qa.setQuestion(qto);
+		qa.setQuestiontext(q.getQuestionText());
+		qa.setPreferredLanguage(q.getPreferredLanguage());
+		qa.setCommunicationMode(q.getCommunicationMode());
+		qa.setPreferredTime(q.getPreferredTime());
 		int i=0;
 		while(i< alist.size())
 		{
@@ -221,12 +230,13 @@ public class DTOService
 	}
 	
 	//tested
-	public boolean postquestion(PostQuestionDTO q) {
-		if(!qservice.createQuestion(q.getQuestion()))
-			return false;
+	public long postquestion(PostQuestionDTO q) {
+		long qid = qservice.createQuestion(q.getQuestion());
+		if(qid == -1)
+			return -1;
 		if(!qtservice.addmultipletopics(q.getQuestion().getQuestionid(), q.getTagid()))
-			return false;
-		return true;
+			return -1;
+		return qid;
 	}	
 	
 	public List<Long> getquestiontags(long qid)
@@ -273,7 +283,7 @@ public class DTOService
                         if(qlist != null)
                                 return (qlist.size()/10)+1;
                 }
-                else if(type.equalsIgnoreCase("answer"))
+                else if(type.equalsIgnoreCase("answers"))
                 {
                         List<Answers> alist = aservice.getuseranswers(uid);
                         if(alist != null)
@@ -282,6 +292,31 @@ public class DTOService
 
 		return 0;
 	 }
+
+	public List<QuestionDTO> search(String keywords) 
+	{
+		Set<Question> qlist = s.search(keywords);
+		List<QuestionDTO> qdtolist = new ArrayList<QuestionDTO>();
+		int i =0;
+		while(i<qlist.size() && qlist.iterator().hasNext())
+		{
+		
+			Question q = qlist.iterator().next();
+			long qid = q.getQuestionid();
+		QuestionDTO qto = new QuestionDTO();
+		qto.setQuestionid(q.getQuestionid());
+		qto.setTitle(q.getTitle());
+		qto.setState(q.getState());
+		qto.setTimestamp(q.getTimestamp());
+		qto.setTagnamelist(qtservice.gettagsname(qtservice.gettagids(q.getQuestionid())));
+		qto.setUpvote(rservice.getquestionupvotecount(qid));
+		qto.setDownvote(rservice.getquestiondownvotecount(qid));
+		qto.setUsername(nservice.getusername(q.getUserid()));
+		
+		qdtolist.add(qto);
+		}
+		return qdtolist;
+	}
 
 	
 }
