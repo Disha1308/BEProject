@@ -54,12 +54,18 @@ public class ExpertDTOService
 		
 		List<Long> unavailableexperts = response.getBody();
 		
+		//get owner user of the question
+		ResponseEntity<Long> owneruserid = restT.exchange("http://localhost:8082/v1.0/question/"+qid+"userid",
+			    HttpMethod.GET, null, Long.class );
+		
+		long owner = owneruserid.getBody();
+		
 		List<ExpertDTO> expertlist = new ArrayList<ExpertDTO>();
 		int i=0,expertcount=0;
 		while(i < useridlist.size() && expertcount < 10)
 		{
 			long id = useridlist.get(i++);
-			if(unavailableexperts != null && unavailableexperts.contains(id))
+			if((unavailableexperts != null && unavailableexperts.contains(id)) || id == owner)
 			{
 			}
 			else

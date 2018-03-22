@@ -1,7 +1,6 @@
 package com.beproject.QAmanagement.rest;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Named;
 import javax.ws.rs.GET;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.beproject.QAmanagement.configuration.URLConstants;
 import com.beproject.QAmanagement.dto.*;
 import com.beproject.QAmanagement.models.*;
-import com.beproject.QAmanagement.service.CosineSearch;
 
 @RestController
 @Named
@@ -65,6 +63,14 @@ public class QAController
 	public List<AnswerDTO> getUserAnswers(@PathParam("userid") long userid,@PathParam("pageno") int pageno) {
 		System.out.println("in get user asked questions controller");	
 		return dservice.getuseranswer(userid,pageno);
+	}
+	
+	@GET //t
+	@Path(URLConstants.GET_QUESTION_USERID_URL)
+	@Produces(MediaType.APPLICATION_JSON)
+	public long getQuestionuserid(@PathParam("questionid") long qid) {
+		System.out.println("in get question answer controller");	
+		return dservice.getquestionuserid(qid);
 	}
 	
 	@GET //t

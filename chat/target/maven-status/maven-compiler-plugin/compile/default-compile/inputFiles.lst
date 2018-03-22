@@ -1,0 +1,16 @@
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/configuration/WebSocketConfig.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/models/ChatSessionRepository.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/configuration/SecurityConfiguration.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/configuration/JsonDateSerializer.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/rest/ChatAnswerController.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/configuration/JsonDateDeserializer.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/configuration/URLConstants.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/configuration/Application.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/service/ChatAnswerService.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/models/ChatAnswerRepository.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/configuration/ApplicationConfig.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/models/ChatAnswer.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/configuration/AuthenticationProcessingFilter.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/configuration/CORSFilter.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/models/ChatSession.java
+/home/robin/BEProject/UCAN/chat/src/main/java/com/beproject/chat/configuration/WebAppInitialiser.java

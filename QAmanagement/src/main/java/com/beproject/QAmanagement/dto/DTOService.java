@@ -300,6 +300,10 @@ public class DTOService
                         return (nlist.size()/10)+1;
         	
                 }
+                else
+                {
+                	System.out.println("incorrect type");
+                }
 
 		return 0;
 	 }
@@ -328,6 +332,10 @@ public class DTOService
 		i++;
 		}
 		return qdtolist;
+	}
+
+	public long getquestionuserid(long qid) {
+		return qservice.getOneQuestionService(qid).getUserid();
 	}
 
 	

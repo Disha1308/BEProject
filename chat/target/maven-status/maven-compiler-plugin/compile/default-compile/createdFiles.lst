@@ -1,0 +1,16 @@
+com/beproject/chat/configuration/WebSocketConfig$1.class
+com/beproject/chat/configuration/JsonDateDeserializer.class
+com/beproject/chat/configuration/SecurityConfiguration.class
+com/beproject/chat/models/ChatAnswer.class
+com/beproject/chat/configuration/URLConstants.class
+com/beproject/chat/configuration/ApplicationConfig.class
+com/beproject/chat/configuration/JsonDateSerializer.class
+com/beproject/chat/configuration/WebSocketConfig.class
+com/beproject/chat/models/ChatSessionRepository.class
+com/beproject/chat/configuration/WebAppInitialiser.class
+com/beproject/chat/models/ChatSession.class
+com/beproject/chat/models/ChatAnswerRepository.class
+com/beproject/chat/configuration/AuthenticationProcessingFilter.class
+com/beproject/chat/rest/ChatAnswerController.class
+com/beproject/chat/service/ChatAnswerService.class
+com/beproject/chat/configuration/Application.class

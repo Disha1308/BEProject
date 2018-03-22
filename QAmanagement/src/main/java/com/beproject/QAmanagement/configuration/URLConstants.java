@@ -10,6 +10,7 @@ public interface URLConstants {
 	String GET_USER_ANSWERS_URL = "/user/{userid}/answers/{pageno}";	
 	
 	String GET_QUESTION_ANSWERS_URL = "/question/{questionid}";
+	String GET_QUESTION_USERID_URL = "/question/{questionid}/userid";
 	
 	String POST_ANSWER_URL = "/answer";	
 	String POST_ANSWER_VOTE_URL = "/answer/vote";

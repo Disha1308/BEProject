@@ -114,8 +114,14 @@ public class NotificationDTOService
 		Question q = qRepo.findOne(nmsg.getQuestionid());
 		ndto.setUsername(getusername(nmsg.getSeekerid()));
 		ndto.setQuestionid(nmsg.getQuestionid());
+		if(q!= null){
 		ndto.setQuestiontitle(q.getQuestionText());
 		ndto.setPrefferedtimestamp(q.getPreferredTime());
+		}
+		else
+		{
+			//todo handle question deletion case
+		}
 		return ndto;
 	}
 

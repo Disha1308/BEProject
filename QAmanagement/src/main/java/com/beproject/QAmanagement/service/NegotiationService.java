@@ -75,13 +75,20 @@ public class NegotiationService
 				m.setSeekerid(msg.getSeekerid());
 				nRepo.save(m); //update status
 				
+				Notification n = notifyRepo.findunique(m.getSeekerid(), m.getMessageid());
 				//create notification
-				Notification n = new Notification();
+				if(n == null){
+				 n = new Notification();
 				n.setType(notificationtype.requeststatus);
 				n.setAttributeid(m.getMessageid());
 				n.setTimestamp(new Date()); //set current timestamp
 				n.setState(notificationstatus.unread);
 				n.setUserid(m.getSeekerid());
+				}
+				else
+				{
+					
+				}
 				notifyRepo.save(n);
 				
 				Question q = qRepo.findOne(m.getQuestionid());
