@@ -128,8 +128,8 @@ public class CosineSearch
 		 int i =0 ;
 		 while(documents != null && i<documents.size())
 		 {
-			double csvalue =  Cosine_Similarity_Score(keywords,documents.get(i).getQuestionText());
-			if(csvalue > 0)
+			double csvalue =  Cosine_Similarity_Score(keywords.toLowerCase(),documents.get(i).getQuestionText().toLowerCase());
+			//if(csvalue > 0)
 			 documents_score.put(documents.get(i), csvalue); 
 			 System.out.println("cosine sim:"+documents.get(i).getQuestionText()+":"+csvalue);
 			 i++;
@@ -137,7 +137,7 @@ public class CosineSearch
 		documents_score.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()));
 		
 		Set<Question> result = (documents_score.keySet());
-		result.stream().limit(5);
+		//result.stream().limit(5);
 		return result;
 	 }
 	 

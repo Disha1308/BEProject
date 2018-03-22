@@ -2,6 +2,7 @@ package com.beproject.QAmanagement.dto;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -313,10 +314,11 @@ public class DTOService
 		Set<Question> qlist = s.search(keywords);
 		List<QuestionDTO> qdtolist = new ArrayList<QuestionDTO>();
 		int i =0;
-		while(i<qlist.size() && qlist.iterator().hasNext())
+		Iterator<Question> it = qlist.iterator();
+		while(i<qlist.size() && it.hasNext())
 		{
 		
-			Question q = qlist.iterator().next();
+			Question q = it.next();
 			long qid = q.getQuestionid();
 		QuestionDTO qto = new QuestionDTO();
 		qto.setQuestionid(q.getQuestionid());
