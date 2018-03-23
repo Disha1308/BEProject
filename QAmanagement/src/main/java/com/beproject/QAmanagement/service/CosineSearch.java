@@ -1,11 +1,15 @@
 package com.beproject.QAmanagement.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,11 +124,11 @@ public class CosineSearch
 
      }
 	 
-	 public Set<Question> search(String keywords)
+	 public List<Question> search(String keywords)
 	 {
 		 List<Question> documents = (List<Question>) qrepo.findAll();
-		 Map<Question, Double> documents_score = new HashMap<Question, Double>();
-         
+		 Map<Question, Double> documents_score = new LinkedHashMap<Question, Double>();
+         List<Question> result = new ArrayList<Question>();
 		 int i =0 ;
 		 while(documents != null && i<documents.size())
 		 {
@@ -132,11 +136,33 @@ public class CosineSearch
 			//if(csvalue > 0)
 			 documents_score.put(documents.get(i), csvalue); 
 			 System.out.println("cosine sim:"+documents.get(i).getQuestionText()+":"+csvalue);
+			 System.out.println("Result:"+documents.get(i).getTitle()+":"+csvalue+"\n");
+			 
 			 i++;
 		 }
-		documents_score.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()));
-		
-		Set<Question> result = (documents_score.keySet());
+		 System.out.print("Before sorting");
+			
+		 i =0 ;
+			Iterator<Entry<Question, Double>> mapit = documents_score.entrySet().stream().iterator();
+			 while(documents_score != null && i<documents_score.size()&& mapit.hasNext())
+			 {
+				 Entry<Question, Double> e = mapit.next();
+				 System.out.println("Result:"+e.getKey().getTitle()+":"+e.getValue()+"\n");
+				 
+				 i++;
+			 }
+			 
+		mapit = documents_score.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).iterator();
+		System.out.print("After sorting");
+		i =0 ;
+		//mapit = documents_score.entrySet().stream().iterator();
+		 while(documents_score != null && i<documents_score.size()&& mapit.hasNext())
+		 {
+			 Entry<Question, Double> e = mapit.next();
+			 System.out.println("Result:"+e.getKey().getTitle()+":"+e.getValue()+"\n");
+			 result.add(e.getKey());
+			 i++;
+		 }
 		//result.stream().limit(5);
 		return result;
 	 }

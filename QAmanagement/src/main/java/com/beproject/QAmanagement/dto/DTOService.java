@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -311,7 +309,7 @@ public class DTOService
 
 	public List<QuestionDTO> search(String keywords) 
 	{
-		Set<Question> qlist = s.search(keywords);
+		List<Question> qlist = s.search(keywords);
 		List<QuestionDTO> qdtolist = new ArrayList<QuestionDTO>();
 		int i =0;
 		Iterator<Question> it = qlist.iterator();
