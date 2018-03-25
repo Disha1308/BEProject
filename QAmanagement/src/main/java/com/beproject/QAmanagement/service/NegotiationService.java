@@ -53,9 +53,8 @@ public class NegotiationService
 				n.setUserid(m.getExpertid());
 				notifyRepo.save(n);
 				
-				//time based event for status change to rejected.
 				return true;
-			}
+				}
 			}
 			return false;
 		}
@@ -87,7 +86,7 @@ public class NegotiationService
 				}
 				else
 				{
-					
+					//notification already exisits
 				}
 				notifyRepo.save(n);
 				
@@ -95,12 +94,60 @@ public class NegotiationService
 				//time based notification event for discussion
 				if(m.getMessagestatus().equals(status.accept))
 				{
+					//get other negotiation for question 
+					//change their status to rejected
+					System.out.println("status accepted by expert");
+					List<NegotiationMessage> nlist = nRepo.findByquestionid(m.getQuestionid());
+					int i = 0;
+					while(nlist != null && i<nlist.size())
+					{
+						NegotiationMessage nmsg = nlist.get(i);
+						if(nmsg.getMessageid() != msg.getMessageid() && nmsg.getMessagestatus().equals(status.unread))
+						{
+							nmsg.setMessagestatus(status.reject);
+							nRepo.save(nmsg);
+						}
+						i++;
+					}
+					
 					Timer t=new Timer();
 					t.schedule(new TimerTask() {
 					    public void run() {
 					    	addDiscussionnotification(m);
 					    }
 					}, q.getPreferredTime());
+				}
+				else if(m.getMessagestatus().equals(status.reject))
+				{
+
+					System.out.println("status rejected by expert"+m.getQuestionid());
+					List<NegotiationMessage> nlist = nRepo.findByquestionid(m.getQuestionid());
+					int i = 0;
+					while(nlist != null && i<nlist.size())
+					{
+						if(nlist.get(i).getMessagestatus().equals(status.unread))
+						{
+							break;
+						}
+						i++;
+					}
+					
+					if(nlist != null && i == nlist.size())
+					{
+						Notification reject = notifyRepo.findunique(m.getSeekerid(), m.getQuestionid());
+						//create notification
+						if(reject == null)
+						{
+						reject = new Notification();
+						reject.setType(notificationtype.rejection);
+						reject.setAttributeid(m.getQuestionid());
+						reject.setTimestamp(new Date()); //set current timestamp
+						reject.setState(notificationstatus.unread);
+						reject.setUserid(m.getSeekerid());
+						}
+						notifyRepo.save(reject);
+						
+					}
 				}
 				return true;			
 			}
@@ -121,7 +168,11 @@ public class NegotiationService
 	//internal
 	public void addDiscussionnotification(NegotiationMessage m)
 	{
-		Notification n = new Notification();
+		
+		Notification n = notifyRepo.findunique(m.getSeekerid(), m.getMessageid());
+		//create notification
+		if(n == null){
+		 n = new Notification();}
 		n.setType(notificationtype.discussion);
 		n.setAttributeid(m.getMessageid());
 		n.setTimestamp(new Date()); //set current timestamp
@@ -129,7 +180,10 @@ public class NegotiationService
 		n.setUserid(m.getSeekerid());
 		notifyRepo.save(n);
 		
-		Notification n1 = new Notification();
+		Notification n1 = notifyRepo.findunique(m.getExpertid(), m.getMessageid());
+		//create notification
+		if(n1 == null){
+		 n1 = new Notification();}
 		n1.setType(notificationtype.discussion);
 		n1.setAttributeid(m.getMessageid());
 		n1.setTimestamp(new Date()); //set current timestamp

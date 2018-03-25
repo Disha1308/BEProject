@@ -51,6 +51,8 @@ public class NotificationDTOService
 				break;
 			case seekerrequest:ndto = getType4Dto(n);
 				break;
+			case rejection:ndto = getType5Dto(n);
+				break;
 			default:
 				break;		
 			}
@@ -75,10 +77,11 @@ public class NotificationDTOService
 	private NotificationDTO getType1Dto(Notification n) {		
 		NotificationDTO ndto = new NotificationDTO();
 		Answers a = aRepo.findOne(n.getAttributeid());
+		if(a!=null){
 		ndto.setQuestionid(a.getQuestionid());
 		ndto.setUsername(getusername(a.getUserid()));
 		ndto.setQuestiontitle(qRepo.findOne(a.getQuestionid()).getQuestionText());
-		ndto.setPrefferedtimestamp(a.getTimestamp());
+		ndto.setPrefferedtimestamp(a.getTimestamp());}
 		return ndto;
 	}
 	
@@ -86,9 +89,10 @@ public class NotificationDTOService
 		NotificationDTO ndto = new NotificationDTO();
 		NegotiationMessage nmsg = negoRepo.findOne(n.getAttributeid());
 		Question q = qRepo.findOne(nmsg.getQuestionid());
+		if(q!=null){
 		ndto.setQuestionid(nmsg.getQuestionid());
 		ndto.setQuestiontitle(q.getQuestionText());
-		ndto.setPrefferedtimestamp(q.getPreferredTime());
+		ndto.setPrefferedtimestamp(q.getPreferredTime());}
 		if(n.getUserid() == nmsg.getSeekerid())
 			ndto.setUsername(getusername(nmsg.getExpertid()));
 		else
@@ -100,10 +104,12 @@ public class NotificationDTOService
 		NotificationDTO ndto = new NotificationDTO();
 		NegotiationMessage nmsg = negoRepo.findOne(n.getAttributeid());
 		Question q = qRepo.findOne(nmsg.getQuestionid());
+	
 		ndto.setUsername(getusername(nmsg.getExpertid()));
 		ndto.setQuestionid(nmsg.getQuestionid());
+		if(q!=null){
 		ndto.setQuestiontitle(q.getQuestionText());
-		ndto.setPrefferedtimestamp(q.getPreferredTime());
+		ndto.setPrefferedtimestamp(q.getPreferredTime());}
 		ndto.setNegotiationStatus(nmsg.getMessagestatus().toString());
 		return ndto;
 	}
@@ -125,6 +131,18 @@ public class NotificationDTOService
 		return ndto;
 	}
 
+	private NotificationDTO getType5Dto(Notification n)
+	{
+		NotificationDTO ndto = new NotificationDTO();
+		Question q = qRepo.findOne(n.getAttributeid());
+	
+		if(q!=null){
+		ndto.setUsername(getusername(q.getUserid()));
+		ndto.setQuestionid(q.getQuestionid());
+		ndto.setQuestiontitle(q.getQuestionText());
+		}
+		return ndto;
+	}
 	
 	public String getusername(long userid) {
 		try{

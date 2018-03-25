@@ -15,6 +15,7 @@ public interface URLConstants {
 	String POST_ANSWER_URL = "/answer";	
 	String POST_ANSWER_VOTE_URL = "/answer/vote";
 	String POST_QUESTION_VOTE_URL = "/question/vote";
+	String PUT_CLOSE_STATUS_URL = "/close/{questionid}";
 	
 	String POST_QUESTION_URL = "/question";
 	String GET_QUESTION_TAG_URL = "/question/{questionid}/tags"; 

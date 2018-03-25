@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChatAnswerRepository extends CrudRepository<ChatAnswer,Long>
 {
-	List<ChatAnswer> findByuserid(long userid);
+	List<ChatAnswer> findBychatsessionid(long sid);
 }

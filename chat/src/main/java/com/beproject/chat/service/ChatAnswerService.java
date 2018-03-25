@@ -1,6 +1,7 @@
 package com.beproject.chat.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -57,6 +58,8 @@ public class ChatAnswerService {
 	{
 		ChatSession s = sessionRepo.findunique(session.getSeekerid(), session.getExpertid(), session.getQuestionid());
 		long sid = -1;
+		if(s==null)
+			s= sessionRepo.findunique(session.getExpertid(), session.getSeekerid(),session.getQuestionid());
 		if(s==null){
 			s = session;
 			sid = -2;
@@ -99,6 +102,23 @@ public class ChatAnswerService {
 		{ 
 			System.out.println("session not found");
 		}
+	}
+
+	public long getsessionid(long sid, long eid, long qid) 
+	{
+		ChatSession s = sessionRepo.findunique(sid, eid, qid);
+		if (s==null)
+			s= sessionRepo.findunique(eid, sid, qid);
+		if(s == null)
+			return -1;
+		else
+			return s.getChatsessionid();
+	}
+
+	public List<ChatAnswer> getsessionanswers(long sid) 
+	{
+		List<ChatAnswer> answerlist = answerRepo.findBychatsessionid(sid);
+		return answerlist;
 	}
 
 }

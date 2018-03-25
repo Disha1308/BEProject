@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Named;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -141,5 +142,14 @@ public class QAController
 	{
 		System.out.println("in search question controller");
 		return dservice.search(keywords);
+	}
+	
+	@PUT
+	@Path(URLConstants.PUT_CLOSE_STATUS_URL)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void closequestion(@PathParam("questionid") long qid)
+	{
+		System.out.println("in close question controller");
+		dservice.closequestion(qid);
 	}
 }

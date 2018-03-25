@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 @Table(name = "Notification")
 public class Notification 
 {
-	public enum notificationtype {answer, seekerrequest, requeststatus, discussion}
+	public enum notificationtype {answer, seekerrequest, requeststatus, discussion,rejection}
 	public enum notificationstatus{read,unread};
 	@Id
 	@GeneratedValue

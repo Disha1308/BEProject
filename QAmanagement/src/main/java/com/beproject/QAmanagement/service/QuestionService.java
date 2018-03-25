@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.beproject.QAmanagement.models.Question;
+import com.beproject.QAmanagement.models.Question.status;
 import com.beproject.QAmanagement.repository.*;
 
 
@@ -80,5 +81,14 @@ public class QuestionService {
 		
 	}
 	return null;
+	}
+
+	public void changestatus(long qid) {
+		Question q = questionRepo.findOne(qid);
+		if(q!=null)
+		{
+			q.setState(status.Close);
+			questionRepo.save(q);
+		}
 	}
 }

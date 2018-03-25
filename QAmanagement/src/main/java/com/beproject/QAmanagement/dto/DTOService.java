@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.beproject.QAmanagement.models.*;
+import com.beproject.QAmanagement.models.Question.status;
 import com.beproject.QAmanagement.repository.NotificationRepository;
 import com.beproject.QAmanagement.service.*;
 
@@ -336,6 +338,12 @@ public class DTOService
 
 	public long getquestionuserid(long qid) {
 		return qservice.getOneQuestionService(qid).getUserid();
+	}
+
+	public void closequestion(long qid) 
+	{
+		qservice.changestatus(qid);
+		
 	}
 
 	

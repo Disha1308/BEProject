@@ -34,7 +34,7 @@ public class ExpertDTOService
 	public List<ExpertDTO> getexperts(long qid) {
 		System.out.println("in get experts dto service");
 			
-		try{
+		//try{
 			RestTemplate restT = new RestTemplate();
 		ResponseEntity<List<Long>> response = restT.exchange("http://localhost:8082/v1.0/question/"+qid+"/tags",
 			    HttpMethod.GET, null, new ParameterizedTypeReference <List<Long>>(){} );
@@ -55,9 +55,9 @@ public class ExpertDTOService
 		List<Long> unavailableexperts = response.getBody();
 		
 		//get owner user of the question
-		ResponseEntity<Long> owneruserid = restT.exchange("http://localhost:8082/v1.0/question/"+qid+"userid",
+		ResponseEntity<Long> owneruserid = restT.exchange("http://localhost:8082/v1.0/question/"+qid+"/userid",
 			    HttpMethod.GET, null, Long.class );
-		
+	
 		long owner = owneruserid.getBody();
 		
 		List<ExpertDTO> expertlist = new ArrayList<ExpertDTO>();
@@ -86,11 +86,11 @@ public class ExpertDTOService
 			}
 		}
 		return expertlist;
-	}
+	/*}
 		catch(Exception e)
 		{
 			System.out.println("question management not available");
 			return null;
-		}
+		}*/
 }
 }

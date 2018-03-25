@@ -3,6 +3,7 @@ package com.beproject.usermanagement.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -145,8 +146,19 @@ public class UserTopicService
 		List<Long> expertlist = new ArrayList<Long>();
 		while(topicsit.hasNext())
 		{
+			/*List<Long> expertids = getexperts(topicsit.next());
+			int i = 0;
+			while(i< expertids.size() && expertids != null)
+			{
+				long id = expertids.get(i);
+				if(!expertlist.contains(id))
+					expertlist.add(id);
+			}*/
+			
 			expertlist.addAll(getexperts(topicsit.next()));
+			
 		}
+		expertlist = expertlist.stream().distinct().collect(Collectors.toList());
 		return expertlist;			
 	}
 	

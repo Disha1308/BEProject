@@ -21,4 +21,6 @@ public interface NegotiationMessageRepository extends CrudRepository<Negotiation
 	@Query("select n from NegotiationMessage n where n.expertid=:eid and n.questionid=:qid")
 	public NegotiationMessage findunique( @Param("eid") long eid,@Param("qid")long qid);
 	
+	List<NegotiationMessage> findByquestionid(long qid);
+	
 }
