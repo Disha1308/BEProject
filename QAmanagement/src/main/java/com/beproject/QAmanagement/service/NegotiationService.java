@@ -74,7 +74,7 @@ public class NegotiationService
 				m.setSeekerid(msg.getSeekerid());
 				nRepo.save(m); //update status
 				
-				Notification n = notifyRepo.findunique(m.getSeekerid(), m.getMessageid());
+				Notification n = notifyRepo.findunique(m.getSeekerid(), m.getMessageid(),notificationtype.requeststatus);
 				//create notification
 				if(n == null){
 				 n = new Notification();
@@ -106,16 +106,24 @@ public class NegotiationService
 						{
 							nmsg.setMessagestatus(status.reject);
 							nRepo.save(nmsg);
+							Notification seekerrequestnotification = notifyRepo.findunique(nmsg.getExpertid(), nmsg.getMessageid(), notificationtype.seekerrequest);
+							if(seekerrequestnotification !=null)
+							{
+								seekerrequestnotification.setState(notificationstatus.read);
+								notifyRepo.save(seekerrequestnotification);
+							}
 						}
 						i++;
 					}
 					
+					if(q.getPreferredTime().after(new Date())){
 					Timer t=new Timer();
 					t.schedule(new TimerTask() {
 					    public void run() {
 					    	addDiscussionnotification(m);
 					    }
 					}, q.getPreferredTime());
+					}
 				}
 				else if(m.getMessagestatus().equals(status.reject))
 				{
@@ -134,7 +142,7 @@ public class NegotiationService
 					
 					if(nlist != null && i == nlist.size())
 					{
-						Notification reject = notifyRepo.findunique(m.getSeekerid(), m.getQuestionid());
+						Notification reject = notifyRepo.findunique(m.getSeekerid(), m.getQuestionid(),notificationtype.rejection);
 						//create notification
 						if(reject == null)
 						{
@@ -169,7 +177,7 @@ public class NegotiationService
 	public void addDiscussionnotification(NegotiationMessage m)
 	{
 		
-		Notification n = notifyRepo.findunique(m.getSeekerid(), m.getMessageid());
+		Notification n = notifyRepo.findunique(m.getSeekerid(), m.getMessageid(),notificationtype.discussion);
 		//create notification
 		if(n == null){
 		 n = new Notification();}
@@ -180,7 +188,7 @@ public class NegotiationService
 		n.setUserid(m.getSeekerid());
 		notifyRepo.save(n);
 		
-		Notification n1 = notifyRepo.findunique(m.getExpertid(), m.getMessageid());
+		Notification n1 = notifyRepo.findunique(m.getExpertid(), m.getMessageid(), notificationtype.discussion);
 		//create notification
 		if(n1 == null){
 		 n1 = new Notification();}
