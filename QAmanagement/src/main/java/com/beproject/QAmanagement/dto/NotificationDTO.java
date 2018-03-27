@@ -10,6 +10,7 @@ public class NotificationDTO
 {
 	private long notificationid;
 	private notificationtype ntype;
+	private long userid;
 	private String username;
 	private String questiontitle;
 	private notificationstatus state;
@@ -76,5 +77,11 @@ public class NotificationDTO
 	}
 	public void setNegotiationStatus(String negotiationStatus) {
 		this.negotiationStatus = negotiationStatus;
+	}
+	public long getUserid() {
+		return userid;
+	}
+	public void setUserid(long userid) {
+		this.userid = userid;
 	}
 }

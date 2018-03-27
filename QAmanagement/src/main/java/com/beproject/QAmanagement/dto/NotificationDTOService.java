@@ -79,6 +79,7 @@ public class NotificationDTOService
 		Answers a = aRepo.findOne(n.getAttributeid());
 		if(a!=null){
 		ndto.setQuestionid(a.getQuestionid());
+		ndto.setUserid(a.getUserid());
 		ndto.setUsername(getusername(a.getUserid()));
 		ndto.setQuestiontitle(qRepo.findOne(a.getQuestionid()).getQuestionText());
 		ndto.setPrefferedtimestamp(a.getTimestamp());}
@@ -94,9 +95,11 @@ public class NotificationDTOService
 		ndto.setQuestiontitle(q.getQuestionText());
 		ndto.setPrefferedtimestamp(q.getPreferredTime());}
 		if(n.getUserid() == nmsg.getSeekerid())
-			ndto.setUsername(getusername(nmsg.getExpertid()));
+		{	ndto.setUserid(nmsg.getExpertid());
+			ndto.setUsername(getusername(nmsg.getExpertid()));}
 		else
-			ndto.setUsername(getusername(nmsg.getSeekerid()));
+		{	ndto.setUserid(nmsg.getSeekerid());
+			ndto.setUsername(getusername(nmsg.getSeekerid()));}
 		return ndto;
 	}	
 	
@@ -104,7 +107,8 @@ public class NotificationDTOService
 		NotificationDTO ndto = new NotificationDTO();
 		NegotiationMessage nmsg = negoRepo.findOne(n.getAttributeid());
 		Question q = qRepo.findOne(nmsg.getQuestionid());
-	
+		
+		ndto.setUserid(nmsg.getExpertid());
 		ndto.setUsername(getusername(nmsg.getExpertid()));
 		ndto.setQuestionid(nmsg.getQuestionid());
 		if(q!=null){
@@ -118,6 +122,7 @@ public class NotificationDTOService
 		NotificationDTO ndto = new NotificationDTO();
 		NegotiationMessage nmsg = negoRepo.findOne(n.getAttributeid());
 		Question q = qRepo.findOne(nmsg.getQuestionid());
+		ndto.setUserid(nmsg.getSeekerid());
 		ndto.setUsername(getusername(nmsg.getSeekerid()));
 		ndto.setQuestionid(nmsg.getQuestionid());
 		if(q!= null){
@@ -137,6 +142,7 @@ public class NotificationDTOService
 		Question q = qRepo.findOne(n.getAttributeid());
 	
 		if(q!=null){
+		ndto.setUserid(q.getUserid());
 		ndto.setUsername(getusername(q.getUserid()));
 		ndto.setQuestionid(q.getQuestionid());
 		ndto.setQuestiontitle(q.getQuestionText());
