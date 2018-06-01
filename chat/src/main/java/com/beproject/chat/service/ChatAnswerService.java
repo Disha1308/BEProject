@@ -59,12 +59,13 @@ public class ChatAnswerService {
 		ChatSession s = sessionRepo.findunique(session.getSeekerid(), session.getExpertid(), session.getQuestionid());
 		long sid = -1;
 		if(s==null)
-			s= sessionRepo.findunique(session.getExpertid(), session.getSeekerid(),session.getQuestionid());
+			s = sessionRepo.findunique(session.getExpertid(), session.getSeekerid(),session.getQuestionid());
 		if(s==null){
 			s = session;
 			sid = -2;
 		}
-		if(session.getSeekerid() == uid)
+	
+		if(s.getSeekerid() == uid)
 		{
 			s.setSeekerstatus(true);
 		}
@@ -72,8 +73,9 @@ public class ChatAnswerService {
 		{
 			s.setExpertstatus(true);
 		}
-		sessionRepo.save(s);
 		
+		while(sessionRepo.save(s) == null){};
+	
 		if(sid == -2)
 		{ 
 			s = sessionRepo.findunique(session.getSeekerid(), session.getExpertid(), session.getQuestionid());
@@ -120,5 +122,9 @@ public class ChatAnswerService {
 		List<ChatAnswer> answerlist = answerRepo.findBychatsessionid(sid);
 		return answerlist;
 	}
-
+	
+	public List<Long> getsessionid(long qid)
+	{
+		return sessionRepo.findbyquestionid(qid);
+	}
 }

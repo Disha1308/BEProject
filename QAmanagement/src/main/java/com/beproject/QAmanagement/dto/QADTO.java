@@ -26,8 +26,15 @@ public class QADTO
 	private languages preferredLanguage;
 	private mode communicationMode;
 	List<AnswerDTO> answers;
+	List<Long> chatsessionids;
 	
 	
+	public List<Long> getChatsessionids() {
+		return chatsessionids;
+	}
+	public void setChatsessionids(List<Long> chatsessionids) {
+		this.chatsessionids = chatsessionids;
+	}
 	public String getQuestiontext() {
 		return questiontext;
 	}

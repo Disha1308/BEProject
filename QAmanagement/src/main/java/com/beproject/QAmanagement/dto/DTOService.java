@@ -197,6 +197,7 @@ public class DTOService
 		qa.setPreferredLanguage(q.getPreferredLanguage());
 		qa.setCommunicationMode(q.getCommunicationMode());
 		qa.setPreferredTime(q.getPreferredTime());
+		qa.setChatsessionids(qservice.getsessionids(qid));
 		int i=0;
 		while(i< alist.size())
 		{

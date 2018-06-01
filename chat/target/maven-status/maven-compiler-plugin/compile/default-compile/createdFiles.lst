@@ -1,6 +1,7 @@
 com/beproject/chat/configuration/WebSocketConfig$1.class
 com/beproject/chat/configuration/JsonDateDeserializer.class
 com/beproject/chat/configuration/SecurityConfiguration.class
+com/beproject/chat/configuration/CORSFilter.class
 com/beproject/chat/models/ChatAnswer.class
 com/beproject/chat/configuration/URLConstants.class
 com/beproject/chat/configuration/ApplicationConfig.class

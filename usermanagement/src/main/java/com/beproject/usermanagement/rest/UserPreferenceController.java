@@ -48,7 +48,7 @@ public class UserPreferenceController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public boolean updateUser(@RequestBody UserPreference u, @PathParam("userid") long id) {
 		System.out.println("in post user preference rest");
-		return preferenceServe.updateUserPreference(u, id);
+		return preferenceServe.updateUserPreference(u,id);
 	}
 
 	

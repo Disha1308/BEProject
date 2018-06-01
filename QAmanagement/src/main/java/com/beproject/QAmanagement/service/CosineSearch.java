@@ -2,7 +2,6 @@ package com.beproject.QAmanagement.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -10,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -133,7 +131,7 @@ public class CosineSearch
 		 while(documents != null && i<documents.size())
 		 {
 			double csvalue =  Cosine_Similarity_Score(keywords.toLowerCase(),documents.get(i).getQuestionText().toLowerCase());
-			//if(csvalue > 0)
+			if(csvalue > 0)
 			 documents_score.put(documents.get(i), csvalue); 
 			 System.out.println("cosine sim:"+documents.get(i).getQuestionText()+":"+csvalue);
 			 System.out.println("Result:"+documents.get(i).getTitle()+":"+csvalue+"\n");

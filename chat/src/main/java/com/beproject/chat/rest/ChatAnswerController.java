@@ -73,5 +73,11 @@ public class ChatAnswerController
 		System.out.println("in change user session status rest");
 		 return answerServe.getsessionanswers(sid);
 		 }
+	
+	@RequestMapping(value=URLConstants.GET_QUESTION_SESSION_URL, method=RequestMethod.GET)
+	public @ResponseBody List<Long> getquestionsession(@PathVariable("questionid") long qid) {
+		System.out.println("in get question session rest");
+		 return answerServe.getsessionid(qid);
+		 }
 
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -90,5 +91,16 @@ public class QuestionService {
 			q.setState(status.Close);
 			questionRepo.save(q);
 		}
+	}
+	
+	
+	public List<Long> getsessionids(long qid)
+	{
+		RestTemplate restT = new RestTemplate();
+		ResponseEntity<List<Long>> response = restT.exchange("http://localhost:8083/questionsession/"+qid,
+			    HttpMethod.GET, null, new ParameterizedTypeReference <List<Long>>(){} );
+		
+		List<Long> sessionidlist = response.getBody();
+		return sessionidlist;
 	}
 }

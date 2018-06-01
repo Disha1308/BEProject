@@ -15,7 +15,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('http://192.168.43.246:8083/discussionchat');
+    var socket = new SockJS('http://127.0.0.1:8083/discussionchat');
     console.log('socket object ' );
     stompClient = Stomp.over(socket);
     console.log('going to connect ');

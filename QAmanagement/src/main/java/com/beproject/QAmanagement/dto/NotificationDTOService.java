@@ -81,7 +81,7 @@ public class NotificationDTOService
 		ndto.setQuestionid(a.getQuestionid());
 		ndto.setUserid(a.getUserid());
 		ndto.setUsername(getusername(a.getUserid()));
-		ndto.setQuestiontitle(qRepo.findOne(a.getQuestionid()).getQuestionText());
+		ndto.setQuestiontitle(qRepo.findOne(a.getQuestionid()).getTitle());
 		ndto.setPrefferedtimestamp(a.getTimestamp());}
 		return ndto;
 	}
@@ -92,7 +92,7 @@ public class NotificationDTOService
 		Question q = qRepo.findOne(nmsg.getQuestionid());
 		if(q!=null){
 		ndto.setQuestionid(nmsg.getQuestionid());
-		ndto.setQuestiontitle(q.getQuestionText());
+		ndto.setQuestiontitle(q.getTitle());
 		ndto.setPrefferedtimestamp(q.getPreferredTime());}
 		if(n.getUserid() == nmsg.getSeekerid())
 		{	ndto.setUserid(nmsg.getExpertid());
@@ -112,7 +112,7 @@ public class NotificationDTOService
 		ndto.setUsername(getusername(nmsg.getExpertid()));
 		ndto.setQuestionid(nmsg.getQuestionid());
 		if(q!=null){
-		ndto.setQuestiontitle(q.getQuestionText());
+		ndto.setQuestiontitle(q.getTitle());
 		ndto.setPrefferedtimestamp(q.getPreferredTime());}
 		ndto.setNegotiationStatus(nmsg.getMessagestatus().toString());
 		return ndto;
@@ -126,7 +126,7 @@ public class NotificationDTOService
 		ndto.setUsername(getusername(nmsg.getSeekerid()));
 		ndto.setQuestionid(nmsg.getQuestionid());
 		if(q!= null){
-		ndto.setQuestiontitle(q.getQuestionText());
+		ndto.setQuestiontitle(q.getTitle());
 		ndto.setPrefferedtimestamp(q.getPreferredTime());
 		}
 		else
@@ -145,7 +145,7 @@ public class NotificationDTOService
 		ndto.setUserid(q.getUserid());
 		ndto.setUsername(getusername(q.getUserid()));
 		ndto.setQuestionid(q.getQuestionid());
-		ndto.setQuestiontitle(q.getQuestionText());
+		ndto.setQuestiontitle(q.getTitle());
 		}
 		return ndto;
 	}
@@ -165,7 +165,8 @@ public class NotificationDTOService
 		}
 	}
 
-	public boolean changenotificationstatus(long nid) {
+	public boolean changenotificationstatus(long nid) 
+	{
 		Notification n = notifyRepo.findOne(nid);
 		if(n!= null){
 		n.setState(notificationstatus.read);
@@ -176,7 +177,7 @@ public class NotificationDTOService
 	}
 
 	public String getquestiontitle(long questionid) {
-		return qRepo.findOne(questionid).getQuestionText();
+		return qRepo.findOne(questionid).getTitle();
 	}
 	
 }
